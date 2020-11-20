@@ -1,4 +1,8 @@
 	
+start :-
+	initMap,
+	initPlayer.
+
 d :-
 	koordinatP(X,Y),
 	\+tembokKanan(X+1,Y),
@@ -125,7 +129,15 @@ s :-
 s :-
 	koordinatP(X,Y),
 	(
-	tembokBawah(X,Y+1);
+	tembokAtas(X,Y+1);
 	tembokTengah(X,Y+1)
 	),
 	write('Kamu nabrak tembok...'),!.
+
+map :-
+	writeC(0,0), nl, nl,
+	write('Legend'), nl,
+	write('P: Player'), nl,
+	write('S: Store'), nl,
+	write('Q: Quest'), nl,
+	write('D: Dungeon Boss'), nl,!.

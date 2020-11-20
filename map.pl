@@ -1,5 +1,9 @@
 :- dynamic(koordinatP/2).
+:- dynamic(koordinatS/2).
 :- dynamic(koordinatQ/2).
+:- dynamic(koordinatD/2).
+:- dynamic(dimensi/2).
+:- dynamic(tembok/2).
 
 posisiP(X,Y) :-
 	koordinatP(A,B),
@@ -7,8 +11,9 @@ posisiP(X,Y) :-
 	Y =:= B.
 
 posisiS(X,Y) :-				/* Posisi S statik */
-	X =:= 7,
-	Y =:= 7.
+	koordinatS(A,B),
+	X =:= A,
+	Y =:= B.
 
 posisiQ(X,Y) :-
 	koordinatQ(A,B),
@@ -16,33 +21,28 @@ posisiQ(X,Y) :-
 	Y =:= B.
 	
 posisiD(X,Y) :-				/* Posisi D statik */
-	X =:= 1,				
-	Y =:= 10.
+	koordinatD(A,B),
+	X =:= A,				
+	Y =:= B.
 
 tembokAtas(_,Y) :-
 	Y =:= 0.
 	
 tembokBawah(_,Y) :-
-	Y =:= 11.
+	dimensi(_,B),
+	Y =:= B+1.
 	
 tembokKiri(X,_) :-
 	X =:= 0.
 	
 tembokKanan(X,_) :-
-	X =:= 11.
+	dimensi(A,_),
+	X =:= A+1.
 	
 tembokTengah(X,Y) :-
-	X =:= 7, Y =:= 2;
-	X =:= 8, Y =:= 2;
-	X =:= 8, Y =:= 3;
-	X =:= 5, Y =:= 5;
-	X =:= 6, Y =:= 5;
-	X =:= 7, Y =:= 5;
-	X =:= 8, Y =:= 5;
-	X =:= 3, Y =:= 8;
-	X =:= 3, Y =:= 9;
-	X =:= 4, Y =:= 9;
-	X =:= 5, Y =:= 9.
+	tembok(A,B),
+	X =:= A,
+	Y =:= B.
 	
 writeC(X,Y) :-				/* Output sampai di akhir map (selesai) */
 	tembokKanan(X,Y),
@@ -98,29 +98,56 @@ writeC(X,Y) :-
 writeC(X,Y) :-
     write('-'),
     writeC(X+1,Y).
-    
+  
+generateTembok :-
+	dimensi(A,B),
+	A1 is A-1,
+	B1 is B-1,
+	random(2,A1,X),
+	random(2,B1,Y),
+	asserta(tembok(X,Y)).
+  
+initTembok :-
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok,
+	generateTembok.
+	
+initDimensi :-
+	random(10,20,Lebar),
+	random(10,20,Panjang),
+	asserta(dimensi(Lebar,Panjang)).
+
 initPlayer :-
 	asserta(koordinatP(1,1)).
-	
+
+initStore :-
+	dimensi(A,B),
+	random(2,A,X),
+	random(2,B,Y),
+	asserta(koordinatS(X,Y)).
+
 initQuest :-
-	asserta(koordinatQ(2,6)).
-	
-map :-
+	dimensi(A,B),
+	random(2,A,X),
+	random(2,B,Y),
+	asserta(koordinatQ(X,Y)).
+
+initDungeon :-
+	dimensi(A,B),
+	random(2,A,X),
+	random(2,B,Y),
+	asserta(koordinatD(X,Y)).
+
+initMap :-
+	initDimensi,
+	initStore,
+	initDungeon,
 	initQuest,
-	writeC(0,0), nl, nl,
-	write('Legend'), nl,
-	write('P: Player'), nl,
-	write('S: Store'), nl,
-	write('Q: Quest'), nl,
-	write('D: Dungeon Boss'), nl,!.
-
-
-
-
-
-
-
-
-
-
-
+	initTembok.
