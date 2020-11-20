@@ -133,6 +133,41 @@ s :-
 	tembokTengah(X,Y+1)
 	),
 	write('Kamu nabrak tembok...'),!.
+	
+teleportation_scroll(X,Y) :-
+	\+tembokBawah(X,Y),
+	\+tembokAtas(X,Y),
+	\+tembokKiri(X,Y),
+	\+tembokKanan(X,Y),
+	\+tembokTengah(X,Y),
+	\+posisiS(X,Y),
+	\+posisiQ(X,Y),
+	\+posisiD(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	write('Teleportasi berhasil.'),!.
+	
+teleportation_scroll(X,Y) :-
+	posisiS(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	write('Teleportasi berhasil. Kamu berada di Store.'),!.
+	
+teleportation_scroll(X,Y) :-
+	posisiQ(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	write('Teleportasi berhasil. Kamu berada di Quest.'),!.
+	
+teleportation_scroll(X,Y) :-
+	(
+	tembokAtas(X,Y);
+	tembokBawah(X,Y);
+	tembokKiri(X,Y);
+	tembokKanan(X,Y);
+	tembokTengah(X,Y)
+	),
+	write('Nggak bisa teleport ke situ, ada tembok...'),!.
 
 map :-
 	writeC(0,0), nl, nl,
