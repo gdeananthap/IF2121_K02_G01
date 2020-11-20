@@ -125,7 +125,7 @@ s :-
 s :-
 	koordinatP(X,Y),
 	(
-	tembokAtas(X,Y+1);
+	tembokBawah(X,Y+1);
 	tembokTengah(X,Y+1)
 	),
 	write('Kamu nabrak tembok...'),!.
