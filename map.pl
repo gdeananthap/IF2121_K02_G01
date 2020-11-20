@@ -124,9 +124,6 @@ initDimensi :-
 	random(10,20,Panjang),
 	asserta(dimensi(Lebar,Panjang)).
 
-initPlayer :-
-	asserta(koordinatP(1,1)).
-
 initStore :-
 	dimensi(A,B),
 	random(2,A,X),
