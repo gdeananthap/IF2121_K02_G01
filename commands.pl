@@ -27,6 +27,27 @@ d :-
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X+1,Y)),
 	write('Kamu menemui sebuah Quest!'),!.
+
+d :-
+	koordinatP(X,Y),
+	posisiSlime(X+1,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X+1,Y)),
+	write('Kamu bertemu dengan Slime!'),!.
+
+d :-
+	koordinatP(X,Y),
+	posisiGoblin(X+1,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X+1,Y)),
+	write('Kamu bertemu dengan Goblin!'),!.
+
+d :-
+	koordinatP(X,Y),
+	posisiWolf(X+1,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X+1,Y)),
+	write('Kamu bertemu dengan Wolf!'),!.
 	
 d :-
 	koordinatP(X,Y),
@@ -59,6 +80,27 @@ a :-
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X-1,Y)),
 	write('Kamu menemui sebuah Quest!'),!.
+
+a :-
+	koordinatP(X,Y),
+	posisiSlime(X-1,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X-1,Y)),
+	write('Kamu bertemu dengan Slime!'),!.
+
+a :-
+	koordinatP(X,Y),
+	posisiGoblin(X-1,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X-1,Y)),
+	write('Kamu bertemu dengan Goblin!'),!.
+
+a :-
+	koordinatP(X,Y),
+	posisiWolf(X-1,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X-1,Y)),
+	write('Kamu bertemu dengan Wolf!'),!.
 	
 a :-
 	koordinatP(X,Y),
@@ -92,6 +134,27 @@ w :-
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y-1)),
 	write('Kamu menemui sebuah Quest!'),!.
+
+w :-
+	koordinatP(X,Y),
+	posisiSlime(X,Y-1),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y-1)),
+	write('Kamu bertemu dengan Slime!'),!.
+
+w :-
+	koordinatP(X,Y),
+	posisiGoblin(X,Y-1),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y-1)),
+	write('Kamu bertemu dengan Goblin!'),!.
+
+w :-
+	koordinatP(X,Y),
+	posisiWolf(X,Y-1),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y-1)),
+	write('Kamu bertemu dengan Wolf!'),!.
 	
 w :-
 	koordinatP(X,Y),
@@ -125,6 +188,27 @@ s :-
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y+1)),
 	write('Kamu menemui sebuah Quest!'),!.
+
+s :-
+	koordinatP(X,Y),
+	posisiSlime(X,Y+1),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y+1)),
+	write('Kamu bertemu dengan Slime!'),!.
+
+s :-
+	koordinatP(X,Y),
+	posisiGoblin(X,Y+1),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y+1)),
+	write('Kamu bertemu dengan Goblin!'),!.
+
+s :-
+	koordinatP(X,Y),
+	posisiWolf(X,Y+1),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y+1)),
+	write('Kamu bertemu dengan Wolf!'),!.
 	
 s :-
 	koordinatP(X,Y),

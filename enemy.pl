@@ -18,12 +18,31 @@ enemyLevelUp(Name) :-
     Ndefense is Defense+15,
     NmaxHP is MaxHP+20,
     Nspecial is Special+25,
-    Ngold is Goldgained * Nlevel,
-    ((Nlevel =:= 2) ->
-        Nexp is Expgained+5,
-        retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
-        asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
-    ;   Nexp is 2^(Nlevel-2) * 4,
+    ((Name == slime) ->
+        ((Nlevel =:= 2) ->
+            Nexp is Expgained+5,
+            Ngold is 15 * Nlevel,
+            retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
+            asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
+        ;   Nexp is 2^(Nlevel-2) * 4,
+            Ngold is 15 * Nlevel,
+            retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
+            asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
+        )
+    ; (Name == goblin) ->
+        ((Nlevel =:= 2) ->
+            Nexp is Expgained+5,
+            Ngold is 20 * Nlevel,
+            retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
+            asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
+        ;   Nexp is 2^(Nlevel-2) * 4,
+            Ngold is 20 * Nlevel,
+            retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
+            asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
+        )
+    ; (Name == wolf) ->
+        Nexp is 2^(Nlevel-2) * 10,
+        Ngold is 35 * Nlevel,
         retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
         asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
     ).

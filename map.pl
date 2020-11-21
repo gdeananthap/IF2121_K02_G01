@@ -229,3 +229,12 @@ initMap :-
 	initGoblin,
 	initWolf,
 	initTembok.
+
+randomizeEnemy :-
+	retractall(koordinatSlime),
+	retractall(koordinatGoblin),
+	retractall(koordinatWolf),
+	initSlime,
+	initGoblin,
+	initWolf.
+	
