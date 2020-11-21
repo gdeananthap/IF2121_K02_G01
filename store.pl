@@ -72,10 +72,23 @@ gacha :-
         item(Y, ItemName, Type,Rarity,_,_,_,_,_,_),
         addInventory(Y),
         ( (Y =< 3) ->
+            ( (Y =:= 1) ->
+                commonAnimation, swordAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ; (Y =:= 2) ->
+                commonAnimation, bowAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ;   commonAnimation, staffAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            )
+        ;   commonAnimation, armorAnimation,
             write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
-            write(', '), write(ItemName),nl,
-            write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
-        ;   write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
             write(', '), write(ItemName),nl,
             write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
         )
@@ -84,14 +97,28 @@ gacha :-
         item(Y, ItemName, Type,Rarity,_,_,_,_,_,_),
         addInventory(Y),
         ( (Y =< 9) ->
-            write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
-            write(', '), write(ItemName),nl,
-            write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ( (Y =:= 7) ->
+                rareAnimation, swordAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ; (Y =:= 8) ->
+                rareAnimation, bowAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ;   rareAnimation, staffAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            )
         ; (Y =< 12) -> 
+            rareAnimation, armorAnimation,
             write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
             write(', '), write(ItemName),nl,
             write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
-        ;   write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+        ;   rareAnimation, accessoryAnimation,
+            write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
             write(', '), write(ItemName),nl,
             write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
         )
@@ -100,10 +127,23 @@ gacha :-
         item(Y, ItemName, Type,Rarity,_,_,_,_,_,_),
         addInventory(Y),
         ( (Y =< 24) ->
+            ( (Y =:= 22) ->
+                epicAnimation, swordAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ; (Y =:= 23) ->
+                epicAnimation, bowAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ;   epicAnimation, staffAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            )
+        ;   epicAnimation, armorAnimation,
             write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
-            write(', '), write(ItemName),nl,
-            write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
-        ;   write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
             write(', '), write(ItemName),nl,
             write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
         )
@@ -111,10 +151,23 @@ gacha :-
         item(Y, ItemName, Type,Rarity,_,_,_,_,_,_),
         addInventory(Y),
         ( (Y =< 30) ->
+            ( (Y =:= 28) ->
+                legendaryAnimation, swordAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ; (Y =:= 29) ->
+                legendaryAnimation, bowAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            ;   legendaryAnimation, staffAnimation,
+                write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
+                write(', '), write(ItemName),nl,
+                write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
+            )
+        ;   legendaryAnimation, armorAnimation,
             write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
-            write(', '), write(ItemName),nl,
-            write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
-        ;   write('Anda mendapatkan sebuah '), write(Rarity), write(' '), write(Type),
             write(', '), write(ItemName),nl,
             write(ItemName), write(' berhasil ditambahkan ke Inventory Anda.'),nl,!
         )
@@ -206,9 +259,116 @@ sell(Name) :-
     retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
     asserta(player(NameP, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),!.
 
-% weaponAnimation :-
+commonAnimation :-
+    write('               ######   #######  ##     ## ##     ##  #######  ##    ## '),nl,
+    write('              ##    ## ##     ## ###   ### ###   ### ##     ## ###   ## '),nl,
+    write('              ##       ##     ## #### #### #### #### ##     ## ####  ## '),nl,
+    write('              ##       ##     ## ## ### ## ## ### ## ##     ## ## ## ## '),nl,
+    write('              ##       ##     ## ##     ## ##     ## ##     ## ##  #### '),nl,
+    write('              ##    ## ##     ## ##     ## ##     ## ##     ## ##   ### '),nl,
+    write('               ######   #######  ##     ## ##     ##  #######  ##    ## '),nl.
 
-% armorAnimation :-
+rareAnimation :-
+    write('                    ########       ###      ########    ######## '),nl, 
+    write('                    ##     ##     ## ##     ##     ##   ##       '),nl,
+    write('                    ##     ##    ##   ##    ##     ##   ##       '),nl,
+    write('                    ########    ##     ##   ########    ######   '),nl,
+    write('                    ##   ##     #########   ##   ##     ##       '),nl,
+    write('                    ##    ##    ##     ##   ##    ##    ##       '),nl,
+    write('                    ##     ##   ##     ##   ##     ##   ######## '),nl.
 
-% accessoryAnimation :-
+epicAnimation :-
+    write('                      ########   ########    ####    ######  '),nl,
+    write('                      ##         ##     ##    ##    ##    ## '),nl,
+    write('                      ##         ##     ##    ##    ##       '),nl,
+    write('                      ######     ########     ##    ##       '),nl,
+    write('                      ##         ##           ##    ##       '),nl,
+    write('                      ##         ##           ##    ##    ## '),nl,
+    write('                      ########   ##          ####    ######  '),nl.
+
+legendaryAnimation :-
+    write('##       ########  ######   ######## ##    ## ########     ###    ########  ##    ## '),nl,
+    write('##       ##       ##    ##  ##       ###   ## ##     ##   ## ##   ##     ##  ##  ##  '),nl,
+    write('##       ##       ##        ##       ####  ## ##     ##  ##   ##  ##     ##   ####   '),nl,
+    write('##       ######   ##   #### ######   ## ## ## ##     ## ##     ## ########     ##    '),nl,
+    write('##       ##       ##    ##  ##       ##  #### ##     ## ######### ##   ##      ##    '),nl,
+    write('##       ##       ##    ##  ##       ##   ### ##     ## ##     ## ##    ##     ##    '),nl,
+    write('######## ########  ######   ######## ##    ## ########  ##     ## ##     ##    ##    '),nl.
+
+swordAnimation :-
+    write('                         _                                                 '),nl,
+    write('              _         | |                                                '),nl,
+    write('             | | _______| |---------------------------------------------\\  '),nl,
+    write('             |:-)_______|==[]============================================> '),nl,
+    write('             |_|        | |---------------------------------------------/  '),nl,
+    write('                        |_|                                                '),nl.
+
+bowAnimation :-                                         
+    write('                              #######              ....*. '),nl,
+    write('                    #####(#(##(&&&&&#(##(#%%%   ..../**.  '),nl,
+    write('                    ##(##(&              %%##(#%**(#...   '),nl,
+    write('                    %&&&&                     *(##%       '),nl,
+    write('                       ##/                 **(# %%(%      '),nl,
+    write('                          #/             *(##     %#%     '),nl,
+    write('                            ##/       **(#         #(&&   '),nl,
+    write('                               #/   *(##           #(&&   '),nl,
+    write('                                 ##/#               ###&  '),nl,
+    write('                               *(## #/              ###&  '),nl,
+    write('                            **(#      ##/          #(##&  '),nl,
+    write('                       **/%(##           #/        #(&&   '),nl,
+    write('                     */%%#%&               ##/  ##(#(&&   '),nl,
+    write('                  **/%#%%&(                   ####(#&     '),nl,
+    write('                  &%&((                      &&&&&&     '),nl.
+
+staffAnimation :-
+    write('                             (`-._o_.-\')     '),nl,
+    write('                              (`- | -\')      '),nl,
+    write('                               `-.|.-\'       '),nl,
+    write('                                 o|o          '),nl,
+    write('                                ( | )         '),nl,
+    write('                                 `!\'         '),nl,
+    write('                                 (|)          '),nl,
+    write('                                  X           '),nl,
+    write('                                 (|)          '),nl,
+    write('                                 \'|`         '),nl.
+
+accessoryAnimation :-                                
+    write('                           (&&&&&                 '),nl,
+    write('                          (%%&     &              '),nl,
+    write('                        ///.%   /&   #@.          '),nl,
+    write('                       #/@(&      (&    #@        '),nl,
+    write('                     %(@@&&@(@     (&      &,     '),nl,
+    write('                    #&@@&@&&&@*.    %.       &.   '),nl,
+    write('                    #&@@@@@@@@/.   %          &,  '),nl,
+    write('                     (&@@@@@&/.   %.          &.  '),nl,
+    write('                                %.          (&    '),nl,
+    write('                                %.         *&.    '),nl,
+    write('                                   *&#((&&*       '),nl.
+
+armorAnimation :-
+write('                               /+/ -++++++++hh++-                    '),nl,
+write('                             +MNmNMMMMMMNmmmNNNmmNy                  '),nl,
+write('                        -::hyyNMNdmMMNmddmNNMMMNNmMhy:::::           '),nl,
+write('                   /++oodoNoMh+yNmddddmNMNh/yhNsshNyod::/yymdsd`     '),nl,
+write('                  sMhyssm+mMMMNhmNMMMMNsshsyhMMMMd//Nh+///oyo+m`     '),nl,
+write('                   dmy:-/hoNNsdMM/hyom//hhNMMMNdmhodh+sddhdmdh/      '),nl,
+write('                   .Ndhss/NddhmMMym//myhNdNdhsosdNhdo:-:sMMMM/       '),nl,
+write('                    `NsooyssNmmmymmddNsymooydhodN+./ddsydMMh-        '),nl,
+write('                     /yhNd-+d+om:-oy/m+/Ny+oN:./dy:+hMMNMMd          '),nl,
+write('                      /MMmyNy:+Ndhhdsmddd-.oN:::omddNMMmhMd          '),nl,
+write('                      +MMMMMmdyN.+++++-ym++sNNshNMNMMMMMdNd`         '),nl,
+write('                     -MMMMMNdsmN/ ` .smmMmhhNMMMMNdmMMMMMMMy         '),nl,
+write('                    `mMMMMmmy yMNh+sNMmmd--dMMMNmhhmNMMMMMMy         '),nl,
+write('                    oMMMMMmm` sMMmmNMMmNNs ymMMmhdmosMMMMMMd:        '),nl,
+write('                   -NMMMMMhNy smdmMdsmdoos   MNdhN+ .hMMMMMMo        '),nl,
+write('                  -mMMMMdmhmy sh+oNhhdyoos :hMMmhN.`dNMMMMMMy.       '),nl,
+write('                 :dMMMMN/ddMy`ssoMm/:ds+ss yMMMmhm-.NmNMMNMMM+       '),nl,
+write('                -dMMMNMo dMMy++  MNhdNh :y` mMMNmmM--mmNMMNMMM/      '),nl,
+write('               .mMMMNMMh.dMMy++  MMMNNM `s+ .:MMMNMm /MmNMMMMMM`     '),nl,
+write('              oNMMMMNMMMymMs/++  MMMmNM  ++  sMMMMMNoyMNmMMMNMMm     '),nl,
+write('              //oddNMMMMMMMm ++  MNNmNMs ++  MMMmdmmddNMm+mMMMMN.    '),nl,
+write('                   -:m/dMMN- ++  MNmmmMm ++  MMNdddmNNd/` oMMMMho    '),nl,
+write('                     o/`/o.  ++  smmmdNm -o. MMMNMNmo/` `++````      '),nl,
+write('                     `odh:   +mo-/NdmmNNsyd: /////`-:++ho            '),nl,
+write('                        .s+++s: --. .---  /o+++++++--                '),nl.
 
