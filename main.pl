@@ -2,3 +2,4 @@
 :- include('enemy.pl').
 :- include('commands.pl').
 :- include('player.pl').
+:- include('items.pl').

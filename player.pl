@@ -1,5 +1,3 @@
-:- include('items.pl').
-
 :- dynamic(player/10).       /* Player Status */
 :- dynamic(playerEquipment/3). /* Player Equipment */ 
 :- dynamic(inventory/11). /* inventory(NamaItem) */
@@ -22,7 +20,8 @@ initPlayer :-
         asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
         asserta(playerEquipment('Wooden Sword', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
-        asserta(koordinatP(1,1)),!
+        asserta(koordinatP(1,1)),
+        write('Selamat Berjuang Pahlawan '), write(X), write(' '), nl,!
     ;(Y == archer) ->
         Level is 1, 
         MaxHealth is 100,
@@ -33,7 +32,8 @@ initPlayer :-
         asserta(player(X, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
         asserta(playerEquipment('Wooden Bow', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
-        asserta(koordinatP(1,1)),!
+        asserta(koordinatP(1,1)),
+        write('Selamat Berjuang Pahlawan '), write(X), write(' '), nl,!
     ;   Level is 1,
         MaxHealth is 120,
         CurrentHealth is MaxHealth,
@@ -43,11 +43,12 @@ initPlayer :-
         asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
         asserta(playerEquipment('Wooden Staff', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
-        asserta(koordinatP(1,1)),!   
+        asserta(koordinatP(1,1)),
+        write('Selamat Berjuang Pahlawan '), write(X), write(' '), nl,!   
     ).
 	
 chooseName(X) :-
-    write('Siapa Nama Anda : '), read(X), nl, write(X), nl.
+    write('Siapa Nama Anda : '), read(X), nl.
 
 chooseJob(X, Y) :-
     write('Halo '), write(X), nl, 
@@ -91,8 +92,9 @@ use(X) :-
     item(ID, X, Type,_,_,_,_,_,_,_),
     ((Type == potion) -> 
         usePotion(ID),!
-    ;   equip(ID), !
-    % bisa use scroll kalo udh ada teleport   
+    ; (Type == scroll) ->  
+        useTeleport(ID),!    
+    ;   equip(ID), !  
     ).
 
 usePotion(ID) :-
@@ -116,6 +118,26 @@ usePotion(ID) :-
         assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
     ).
 
+useTeleport(ID) :-
+    write('Anda mau teleport kemana?'), nl,
+    dimensi(A,B),
+    repeat,
+    write('Masukkan koordinat X : '), read(X),
+    write('Masukkan koordinat Y : '), read(Y), nl,
+    ( (tembokAtas(X,Y); tembokBawah(X,Y); tembokKiri(X,Y); tembokKanan(X,Y); tembokTengah(X,Y)) ->
+        write('Nggak bisa teleport kesana bro, ada tembok.'),nl,fail
+    ; ( X > A ; Y > B) ->
+        write('Nggak bisa teleport keluar map bro.'),nl,fail
+    ;   teleport(X,Y),
+        inventory(ID,_,_,_,_,_,_,_,_,_,Count),
+        NewCount is Count-1,
+        ((NewCount =:= 0) -> 
+            retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
+        ;   retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
+            assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+        )
+    ).
+    
 equip(ID) :-
     player(_,_,Job,_,_,_,_,_,_,_),
     item(ID, X,_,_,Class,_,_,_,_,_),
@@ -297,20 +319,20 @@ makeListInventory(ListNama, ListType, ListRarity, ListClass, ListCount) :-
     findall(Class, inventory(_,_,_,_,Class,_,_,_,_,_,_), ListClass),
     findall(Count, inventory(_,_,_,_,_,_,_,_,_,_,Count), ListCount).
 
-printInventory([], [], [], [], []).
-printInventory([A|V], [B|W], [C|X], [D|Y], [E|Z]) :-
+writeInventory([], [], [], [], []).
+writeInventory([A|V], [B|W], [C|X], [D|Y], [E|Z]) :-
     (
-        B == potion ->
+        (B == potion ; B == scroll ) ->
         write('- '), write(E), write(' '), write(A), nl,
-        printInventory(V,W,X,Y,Z)
+        writeInventory(V,W,X,Y,Z)
     ;   write('- '), write(E), write(' '), write(A), write(' ('), write(B), 
         write(', '), write(C), write(', '), write(D), write(')'), nl,
-        printInventory(V,W,X,Y,Z) 
+        writeInventory(V,W,X,Y,Z) 
     ).
     
 
-printAllInventory :-
+bag :-
     write('Inventory Anda: '), nl,
     makeListInventory(ListNama, ListType, ListRarity, ListClass, ListCount),
-    printInventory(ListNama, ListType, ListRarity, ListClass, ListCount).
+    writeInventory(ListNama, ListType, ListRarity, ListClass, ListCount).
 
