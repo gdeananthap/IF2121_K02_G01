@@ -4,3 +4,4 @@
 :- include('player.pl').
 :- include('items.pl').
 :- include('store.pl').
+:- include('battle.pl').

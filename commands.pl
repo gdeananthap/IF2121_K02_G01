@@ -11,6 +11,9 @@ d :-
 	\+posisiS(NewX,Y),
 	\+posisiQ(NewX,Y),
 	\+posisiD(NewX,Y),
+	\+posisiSlime(NewX,Y),
+	\+posisiGoblin(NewX,Y),
+	\+posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
 	write('Kamu bergerak satu petak ke kanan.'),!.
@@ -37,7 +40,8 @@ d :-
 	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu bertemu dengan Slime!'),!.
+	write('Kamu bertemu dengan Slime!'),
+	enemyTriggered(slime), !.
 
 d :-
 	koordinatP(X,Y),
@@ -45,7 +49,8 @@ d :-
 	posisiGoblin(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu bertemu dengan Goblin!'),!.
+	write('Kamu bertemu dengan Goblin!'),
+	enemyTriggered(goblin), !.
 
 d :-
 	koordinatP(X,Y),
@@ -53,7 +58,8 @@ d :-
 	posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu bertemu dengan Wolf!'),!.
+	write('Kamu bertemu dengan Wolf!'),
+	enemyTriggered(wolf), !.
 	
 d :-
 	koordinatP(X,Y),
@@ -71,6 +77,9 @@ a :-
 	\+posisiS(NewX,Y),
 	\+posisiQ(NewX,Y),
 	\+posisiD(NewX,Y),
+	\+posisiSlime(NewX,Y),
+	\+posisiGoblin(NewX,Y),
+	\+posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
 	write('Kamu bergerak satu petak ke kiri.'),!.
@@ -132,6 +141,9 @@ w :-
 	\+posisiS(X,NewY),
 	\+posisiQ(X,NewY),
 	\+posisiD(X,NewY),
+	\+posisiSlime(X,NewY),
+	\+posisiGoblin(X,NewY),
+	\+posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
 	write('Kamu bergerak satu petak ke atas.'),!.
@@ -193,6 +205,9 @@ s :-
 	\+posisiS(X,NewY),
 	\+posisiQ(X,NewY),
 	\+posisiD(X,NewY),
+	\+posisiSlime(X,NewY),
+	\+posisiGoblin(X,NewY),
+	\+posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
 	write('Kamu bergerak satu petak ke bawah.'),!.
@@ -220,7 +235,9 @@ s :-
 	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu bertemu dengan Slime!'),!.
+	write('Kamu bertemu dengan Slime!'),
+	enemyTriggered(slime),
+	!.
 
 s :-
 	koordinatP(X,Y),
@@ -228,7 +245,8 @@ s :-
 	posisiGoblin(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu bertemu dengan Goblin!'),!.
+	write('Kamu bertemu dengan Goblin!'),
+	enemyTriggered(goblin),!.
 
 s :-
 	koordinatP(X,Y),
@@ -236,7 +254,8 @@ s :-
 	posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu bertemu dengan Wolf!'),!.
+	write('Kamu bertemu dengan Wolf!'),
+	enemyTriggered(wolf),!.
 	
 s :-
 	koordinatP(X,Y),
@@ -256,6 +275,9 @@ teleport(X,Y) :-
 	\+posisiS(X,Y),
 	\+posisiQ(X,Y),
 	\+posisiD(X,Y),
+	\+posisiSlime(X,Y),
+	\+posisiGoblin(X,Y),
+	\+posisiWolf(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
 	write('Teleportasi berhasil.'),nl,!.
@@ -272,6 +294,25 @@ teleport(X,Y) :-
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
 	write('Teleportasi berhasil. Kamu berada di Quest.'),nl,!.
+
+
+teleport(X,Y) :-
+	posisiSlime(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	write('Kamu bertemu dengan Slime!'),!.
+
+teleport(X,Y) :-
+	posisiGoblin(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	write('Kamu bertemu dengan Goblin!'),!.
+
+teleport(X,Y) :-
+	posisiWolf(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	write('Kamu bertemu dengan Wolf!'),!.
 
 map :-
 	writeC(0,0), nl, nl,
