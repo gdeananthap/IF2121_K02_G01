@@ -2,6 +2,9 @@
 :- dynamic(koordinatS/2).
 :- dynamic(koordinatQ/2).
 :- dynamic(koordinatD/2).
+:- dynamic(koordinatSlime/2).
+:- dynamic(koordinatGoblin/2).
+:- dynamic(koordinatWolf/2).
 :- dynamic(dimensi/2).
 :- dynamic(tembok/2).
 
@@ -23,6 +26,21 @@ posisiQ(X,Y) :-
 posisiD(X,Y) :-				/* Posisi D statik */
 	koordinatD(A,B),
 	X =:= A,				
+	Y =:= B.
+
+posisiSlime(X,Y) :-
+	koordinatSlime(A,B),
+	X =:= A,
+	Y =:= B.
+
+posisiGoblin(X,Y) :-
+	koordinatGoblin(A,B),
+	X =:= A,
+	Y =:= B.
+
+posisiWolf(X,Y) :-
+	koordinatWolf(A,B),
+	X =:= A,
 	Y =:= B.
 
 tembokAtas(_,Y) :-
@@ -67,6 +85,21 @@ writeC(X,Y) :-
 writeC(X,Y) :-
 	posisiD(X,Y),
 	write('D'),
+	writeC(X+1,Y).
+
+writeC(X,Y) :-
+	posisiSlime(X,Y),
+	write('E'),
+	writeC(X+1,Y).
+
+writeC(X,Y) :-
+	posisiGoblin(X,Y),
+	write('G'),
+	writeC(X+1,Y).
+
+writeC(X,Y) :-
+	posisiWolf(X,Y),
+	write('W'),
 	writeC(X+1,Y).
 
 writeC(X,Y) :-
@@ -142,9 +175,57 @@ initDungeon :-
 	random(2,B,Y),
 	asserta(koordinatD(X,Y)).
 
+initSlime :-
+	dimensi(A,B),
+	random(2,A,X),
+	random(2,B,Y),
+	random(2,A,X1),
+	random(2,A,X2),
+	random(2,A,X3),
+	random(2,B,Y1),
+	random(2,B,Y2),
+	random(2,B,Y3),
+	asserta(koordinatSlime(X,Y)),
+	asserta(koordinatSlime(X1,Y1)),
+	asserta(koordinatSlime(X2,Y2)),
+	asserta(koordinatSlime(X3,Y3)).
+
+initGoblin :-
+	dimensi(A,B),
+	random(2,A,X),
+	random(2,B,Y),
+	random(2,A,X1),
+	random(2,A,X2),
+	random(2,A,X3),
+	random(2,B,Y1),
+	random(2,B,Y2),
+	random(2,B,Y3),
+	asserta(koordinatGoblin(X,Y)),
+	asserta(koordinatGoblin(X1,Y1)),
+	asserta(koordinatGoblin(X2,Y2)),
+	asserta(koordinatGoblin(X3,Y3)).
+
+initWolf :-
+	dimensi(A,B),
+	random(2,A,X),
+	random(2,B,Y),
+	random(2,A,X1),
+	random(2,A,X2),
+	random(2,A,X3),
+	random(2,B,Y1),
+	random(2,B,Y2),
+	random(2,B,Y3),
+	asserta(koordinatWolf(X,Y)),
+	asserta(koordinatWolf(X1,Y1)),
+	asserta(koordinatWolf(X2,Y2)),
+	asserta(koordinatWolf(X3,Y3)).
+
 initMap :-
 	initDimensi,
 	initStore,
 	initDungeon,
 	initQuest,
+	initSlime,
+	initGoblin,
+	initWolf,
 	initTembok.
