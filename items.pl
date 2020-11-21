@@ -71,7 +71,7 @@ item(33, 'Emerald of Enchantress', armor, legendary, sorcerer, 0, 60, 150, 0, 10
 /*** Potions ***/
 /** Potion dapat dibeli saat pemain berada di shop **/
 /** Potion dapat digunakan saat pemain berada di battle-scene **/
-item(34, 'Heal Potion', potion, common, none , 0, 0, 0, 50, 100).
+item(34, 'Healing Potion', potion, common, none , 0, 0, 0, 50, 100).
 item(35, 'Attack Potion', potion, common, none , 20, 0, 0, 0, 250).
 item(36, 'Defense Potion', potion, common, none , 0, 20, 0, 0, 250).
 

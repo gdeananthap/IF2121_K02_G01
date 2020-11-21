@@ -3,3 +3,4 @@
 :- include('commands.pl').
 :- include('player.pl').
 :- include('items.pl').
+:- include('store.pl').

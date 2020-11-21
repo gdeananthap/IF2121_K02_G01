@@ -5,216 +5,245 @@ start :-
 
 d :-
 	koordinatP(X,Y),
-	\+tembokKanan(X+1,Y),
-	\+tembokTengah(X+1,Y),
-	\+posisiS(X+1,Y),
-	\+posisiQ(X+1,Y),
-	\+posisiD(X+1,Y),
+	NewX is X+1,
+	\+tembokKanan(NewX,Y),
+	\+tembokTengah(NewX,Y),
+	\+posisiS(NewX,Y),
+	\+posisiQ(NewX,Y),
+	\+posisiD(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X+1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bergerak satu petak ke kanan.'),!.
 	
 d :-
 	koordinatP(X,Y),
-	posisiS(X+1,Y),
+	NewX is X+1,
+	posisiS(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X+1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu berada di Store.'),!.
 	
 d :-
 	koordinatP(X,Y),
-	posisiQ(X+1,Y),
+	NewX is X+1,
+	posisiQ(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X+1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu menemui sebuah Quest!'),!.
 
 d :-
 	koordinatP(X,Y),
-	posisiSlime(X+1,Y),
+	NewX is X+1,
+	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X+1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bertemu dengan Slime!'),!.
 
 d :-
 	koordinatP(X,Y),
-	posisiGoblin(X+1,Y),
+	NewX is X+1,
+	posisiGoblin(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X+1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bertemu dengan Goblin!'),!.
 
 d :-
 	koordinatP(X,Y),
-	posisiWolf(X+1,Y),
+	NewX is X+1,
+	posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X+1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bertemu dengan Wolf!'),!.
 	
 d :-
 	koordinatP(X,Y),
+	NewX is X+1,
 	(
-	tembokKanan(X+1,Y); 
-	tembokTengah(X+1,Y)),
+	tembokKanan(NewX,Y); 
+	tembokTengah(NewX,Y)),
 	write('Kamu nabrak tembok...'),!.
 	
 a :-
 	koordinatP(X,Y),
-	\+tembokKiri(X-1,Y),
-	\+tembokTengah(X-1,Y),
-	\+posisiS(X-1,Y),
-	\+posisiQ(X-1,Y),
-	\+posisiD(X-1,Y),
+	NewX is X-1,
+	\+tembokKiri(NewX,Y),
+	\+tembokTengah(NewX,Y),
+	\+posisiS(NewX,Y),
+	\+posisiQ(NewX,Y),
+	\+posisiD(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X-1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bergerak satu petak ke kiri.'),!.
 	
 a :-
 	koordinatP(X,Y),
-	posisiS(X-1,Y),
+	NewX is X-1,
+	posisiS(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X-1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu berada di Store.'),!.
 	
 a :-
 	koordinatP(X,Y),
-	posisiQ(X-1,Y),
+	NewX is X-1,
+	posisiQ(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X-1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu menemui sebuah Quest!'),!.
 
 a :-
 	koordinatP(X,Y),
-	posisiSlime(X-1,Y),
+	NewX is X-1,
+	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X-1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bertemu dengan Slime!'),!.
 
 a :-
 	koordinatP(X,Y),
-	posisiGoblin(X-1,Y),
+	NewX is X-1,
+	posisiGoblin(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X-1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bertemu dengan Goblin!'),!.
 
 a :-
 	koordinatP(X,Y),
-	posisiWolf(X-1,Y),
+	NewX is X-1,
+	posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X-1,Y)),
+	asserta(koordinatP(NewX,Y)),
 	write('Kamu bertemu dengan Wolf!'),!.
 	
 a :-
 	koordinatP(X,Y),
+	NewX is X-1,
 	(
-	tembokKiri(X-1,Y);
-	tembokTengah(X-1,Y)
+	tembokKiri(NewX,Y);
+	tembokTengah(NewX,Y)
 	),
 	write('Kamu nabrak tembok...'),!.
 
 w :-
 	koordinatP(X,Y),
-	\+tembokAtas(X,Y-1),
-	\+tembokTengah(X,Y-1),
-	\+posisiS(X,Y-1),
-	\+posisiQ(X,Y-1),
-	\+posisiD(X,Y-1),
+	NewY is Y-1,
+	\+tembokAtas(X,NewY),
+	\+tembokTengah(X,NewY),
+	\+posisiS(X,NewY),
+	\+posisiQ(X,NewY),
+	\+posisiD(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y-1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bergerak satu petak ke atas.'),!.
 	
 w :-
 	koordinatP(X,Y),
-	posisiS(X,Y-1),
+	NewY is Y-1,
+	posisiS(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y-1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu berada di Store.'),!.
 	
 w :-
 	koordinatP(X,Y),
-	posisiQ(X,Y-1),
+	NewY is Y-1,
+	posisiQ(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y-1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu menemui sebuah Quest!'),!.
 
 w :-
 	koordinatP(X,Y),
-	posisiSlime(X,Y-1),
+	NewY is Y-1,
+	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y-1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bertemu dengan Slime!'),!.
 
 w :-
 	koordinatP(X,Y),
-	posisiGoblin(X,Y-1),
+	NewY is Y-1,
+	posisiGoblin(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y-1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bertemu dengan Goblin!'),!.
 
 w :-
 	koordinatP(X,Y),
-	posisiWolf(X,Y-1),
+	NewY is Y-1,
+	posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y-1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bertemu dengan Wolf!'),!.
 	
 w :-
 	koordinatP(X,Y),
+	NewY is Y-1,
 	(
-	tembokAtas(X,Y-1);
-	tembokTengah(X,Y-1)
+	tembokAtas(X,NewY);
+	tembokTengah(X,NewY)
 	),
 	write('Kamu nabrak tembok...'),!.
 	
 s :-
 	koordinatP(X,Y),
-	\+tembokBawah(X,Y+1),
-	\+tembokTengah(X,Y+1),
-	\+posisiS(X,Y+1),
-	\+posisiQ(X,Y+1),
-	\+posisiD(X,Y+1),
+	NewY is Y+1,
+	\+tembokBawah(X,NewY),
+	\+tembokTengah(X,NewY),
+	\+posisiS(X,NewY),
+	\+posisiQ(X,NewY),
+	\+posisiD(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y+1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bergerak satu petak ke bawah.'),!.
 	
 s :-
 	koordinatP(X,Y),
-	posisiS(X,Y+1),
+	NewY is Y+1,
+	posisiS(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y+1)),
-	write('Kamu berada di Store.'),!.
+	asserta(koordinatP(X,NewY)),
+	write('Kamu berada di Store.'),
+	write('Ketik store untuk mengakses store'),!.
 	
 s :-
 	koordinatP(X,Y),
-	posisiQ(X,Y+1),
+	NewY is Y+1,
+	posisiQ(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y+1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu menemui sebuah Quest!'),!.
 
 s :-
 	koordinatP(X,Y),
-	posisiSlime(X,Y+1),
+	NewY is Y+1,
+	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y+1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bertemu dengan Slime!'),!.
 
 s :-
 	koordinatP(X,Y),
-	posisiGoblin(X,Y+1),
+	NewY is Y+1,
+	posisiGoblin(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y+1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bertemu dengan Goblin!'),!.
 
 s :-
 	koordinatP(X,Y),
-	posisiWolf(X,Y+1),
+	NewY is Y+1,
+	posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
-	asserta(koordinatP(X,Y+1)),
+	asserta(koordinatP(X,NewY)),
 	write('Kamu bertemu dengan Wolf!'),!.
 	
 s :-
 	koordinatP(X,Y),
+	NewY is Y+1,
 	(
-	tembokAtas(X,Y+1);
-	tembokTengah(X,Y+1)
+	tembokAtas(X,NewY);
+	tembokTengah(X,NewY)
 	),
 	write('Kamu nabrak tembok...'),!.
 	
@@ -229,19 +258,20 @@ teleport(X,Y) :-
 	\+posisiD(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Teleportasi berhasil.'),!.
+	write('Teleportasi berhasil.'),nl,!.
 	
 teleport(X,Y) :-
 	posisiS(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Teleportasi berhasil. Kamu berada di Store.'),!.
+	write('Teleportasi berhasil. Kamu berada di Store.'),nl,
+	write('Ketik store untuk mengakses store'),!.
 	
 teleport(X,Y) :-
 	posisiQ(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Teleportasi berhasil. Kamu berada di Quest.'),!.
+	write('Teleportasi berhasil. Kamu berada di Quest.'),nl,!.
 
 map :-
 	writeC(0,0), nl, nl,

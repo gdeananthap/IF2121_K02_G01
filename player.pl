@@ -29,7 +29,7 @@ initPlayer :-
         Attack is 90, %udah ditambah stat dari basic weapon
         Defense is 60,
         SpecialAttack is 160,
-        asserta(player(X, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
+        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
         asserta(playerEquipment('Wooden Bow', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
         asserta(koordinatP(1,1)),
@@ -121,7 +121,13 @@ usePotion(ID) :-
 useTeleport(ID) :-
     write('Anda mau teleport kemana?'), nl,
     dimensi(A,B),
+    koordinatP(C,D),
+    koordinatS(E,F),
+    koordinatQ(G,H),
     repeat,
+    write('Anda sekarang berada di ('), write(C), write(','), write(D), write(')'),nl,
+    write('Store berada di ('), write(E), write(','), write(F), write(')'),nl,
+    write('Quest berada di ('), write(G), write(','), write(H), write(')'),nl,
     write('Masukkan koordinat X : '), read(X),
     write('Masukkan koordinat Y : '), read(Y), nl,
     ( (tembokAtas(X,Y); tembokBawah(X,Y); tembokKiri(X,Y); tembokKanan(X,Y); tembokTengah(X,Y)) ->
@@ -266,51 +272,11 @@ cekJumlahInventory(Sum):-
     sum_list(List, Sum).
 
 member_inventory(ID,[ID|_]).
-member_inventory(ID,[_|T]) :- member(ID,T).
-
-isEmpty :-
-    cekJumlahInventory(Sum),
-    Sum == 0.
+member_inventory(ID,[_|T]) :- member_inventory(ID,T).
 
 isFull :-
     cekJumlahInventory(Sum),
     Sum == 100.
-
-addInventory(_) :-
-    cekJumlahInventory(Sum),
-    maxInventory(Max),
-    Sum >= Max,
-    write('Inventory Sudah Penuh'),
-    !,fail.
-
-addInventory(ID) :-
-    findall(InvID, inventory(InvID,_,_,_,_,_,_,_,_,_,_), ListID),
-    (   member_inventory(ID, ListID) ->
-        retract(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
-        NewCount is Count+1,
-        assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount))
-    ;   item(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price),
-        Count is 1,
-        assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, Count))
-    ).   
-
-sellItems(Name) :-
-    item(ID,Name,_,_,_,_,_,_,_,_),
-    findall(InvID, inventory(InvID,_,_,_,_,_,_,_,_,_,_), ListID),
-    \+member_inventory(ID, ListID),
-    write('Items yang ingin Kamu jual tidak ada di inventory mu'), nl,
-    !,fail.
-
-sellItems(Name) :-
-    inventory(ID,Name,_,_,_,_,_,_,_,Price,Count),
-    NewCount is Count - 1,
-    (   NewCount =:= 0 ->
-        retract(inventory(ID,_,_,_,_,_,_,_,_,_,_))
-    ;   retract(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
-        assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount))
-    ),!,
-    write('Items berhasil dijual'), nl,
-    write('Anda mendapatkan '), write(Price), write(' gold'), nl.
 
 makeListInventory(ListNama, ListType, ListRarity, ListClass, ListCount) :-
     findall(Name, inventory(_,Name,_,_,_,_,_,_,_,_,_), ListNama),
@@ -330,7 +296,6 @@ writeInventory([A|V], [B|W], [C|X], [D|Y], [E|Z]) :-
         writeInventory(V,W,X,Y,Z) 
     ).
     
-
 bag :-
     write('Inventory Anda: '), nl,
     makeListInventory(ListNama, ListType, ListRarity, ListClass, ListCount),
