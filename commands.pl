@@ -50,6 +50,7 @@ d :-
 	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	slimeAnimetion,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -59,6 +60,7 @@ d :-
 	posisiGoblin(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	goblinAnimation,
 	write('Kamu bertemu dengan Goblin!'),
 	enemyTriggered(goblin), !.
 
@@ -68,6 +70,7 @@ d :-
 	posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	wolfAnimation,
 	write('Kamu bertemu dengan Wolf!'),
 	enemyTriggered(wolf), !.
 	
@@ -121,6 +124,7 @@ a :-
 	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	slimeAnimetion,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -130,6 +134,7 @@ a :-
 	posisiGoblin(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	goblinAnimation,
 	write('Kamu bertemu dengan Goblin!'),
 	enemyTriggered(goblin), !.
 
@@ -139,6 +144,7 @@ a :-
 	posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	wolfAnimation,
 	write('Kamu bertemu dengan Wolf!'),
 	enemyTriggered(wolf), !.
 	
@@ -193,6 +199,7 @@ w :-
 	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	slimeAnimetion,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -202,6 +209,7 @@ w :-
 	posisiGoblin(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	goblinAnimation,
 	write('Kamu bertemu dengan Goblin!'),
 	enemyTriggered(goblin), !.
 
@@ -211,6 +219,7 @@ w :-
 	posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	wolfAnimation,
 	write('Kamu bertemu dengan Wolf!'),
 	enemyTriggered(wolf), !.
 	
@@ -266,6 +275,7 @@ s :-
 	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	slimeAnimetion,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime),
 	!.
@@ -276,6 +286,7 @@ s :-
 	posisiGoblin(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	goblinAnimation,
 	write('Kamu bertemu dengan Goblin!'),
 	enemyTriggered(goblin),!.
 
@@ -285,6 +296,7 @@ s :-
 	posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	wolfAnimation,
 	write('Kamu bertemu dengan Wolf!'),
 	enemyTriggered(wolf),!.
 	
@@ -332,6 +344,7 @@ teleport(X,Y) :-
 	posisiSlime(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
+	slimeAnimetion,
 	write('Teleportasi berhasil. Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -339,6 +352,7 @@ teleport(X,Y) :-
 	posisiGoblin(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
+	goblinAnimation,
 	write('Teleportasi berhasil. Kamu bertemu dengan Goblin!'),
 	enemyTriggered(goblin), !.
 
@@ -346,6 +360,7 @@ teleport(X,Y) :-
 	posisiWolf(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
+	wolfAnimation,
 	write('Teleportasi berhasil. Kamu bertemu dengan Wolf!'),
 	enemyTriggered(wolf), !.
 
@@ -360,5 +375,81 @@ map :-
 	write('S: Store'), nl,
 	write('Q: Quest'), nl,
 	write('D: Dungeon Boss'), nl,!.
-	
+
+
+slimeAnimation :-
+	write('              .-~~~-.                '),nl,
+	write('      .- ~ ~-(       )_ _            '),nl,
+	write('     /                     ~ -.      '),nl,
+	write('    |        o       o         \\    '),nl,
+	write('     \\          ___           ."    '),nl,
+	write('       ~- . _____________ . -~       '),nl.
+
+goblinAnimation :-
+	write('             ,      ,           '),nl,
+	write('            /(.-""-.)\\         '),nl,
+	write('        |\\  \\/      \\/  /|   '),nl,
+	write('        | \\ / =.  .= \\ / |    '),nl,
+	write('        \\( \\   o\\/o   / )/   '),nl,
+	write('         \\_, "-/  \\-" ,_/     '),nl,
+	write('           /   \\__/   \\       '),nl,
+	write('           \\,___/\\___,/       '),nl,
+	write('         ___\\ \\|uu|/ /___     '),nl,
+	write('       /`    \\ .--. /    `\\   '),nl,
+	write('      /       "----"       \\   '),nl.
+
+wolfAnimation:-
+	write('         _                 '),nl,
+	write('        / \\      _-"      '),nl,
+	write('      _/|  \\-""- _ /      '),nl,
+	write(' __-" { |          \\      '),nl,
+	write('     /              \\     '),nl,
+	write('     /       "o.  |o }     '),nl,
+	write('     |            \\ ;     '),nl,
+	write('                   ",      '),nl,
+	write('        \\_         __\\   '),nl,
+	write('           "-_    \\.//    '),nl,
+	write('            / "-____"      '),nl,
+	write('           /               '),nl,
+	write('         _"                '),nl,
+	write('       _-"                 '),nl.
+
+dragonAnimation :-
+	write(' ######   ########  ########    ###    ########       ########  ######## ########      '),nl,
+	write('##    ##  ##     ## ##         ## ##      ##          ##     ## ##       ##     ##     '),nl,
+	write('##        ##     ## ##        ##   ##     ##          ##     ## ##       ##     ##     '),nl,
+	write('##   #### ########  ######   ##     ##    ##          ########  ######   ##     ##     '),nl,
+	write('##    ##  ##   ##   ##       #########    ##          ##   ##   ##       ##     ##     '),nl,
+	write('##    ##  ##    ##  ##       ##     ##    ##          ##    ##  ##       ##     ##     '),nl,
+	write(' ######   ##     ## ######## ##     ##    ##          ##     ## ######## ########      '),nl,
+	write('                               _                                                        '),nl,
+	write('                            ==(W{==========-      /===-                                 '),nl,
+	write('                              ||  (.--.)         /===-_---~~~~~~~~~------____           '),nl,
+	write('                              | \\_,|**|,__      |===-~___                _,-"          '),nl,
+	write('                 -==\\        `\\ " `--"   ),    `//~\\   ~~~~`---.___.-~~              '),nl,
+	write('             ______-==|        /`\\_. .__/\\ \\    | |  \\           _-~`               '),nl,
+	write('       __--~~~  ,-/-==\\      (   | .  |~~~~|   | |   `\\        ,"                     '),nl,
+	write('    _-~       /"    |  \\     )__/==0==-\\<>/   / /      \\      /                      '),nl,
+	write('  ."        /       |   \\      /~\\___/~~\\/  /" /        \\   /"                      '),nl,
+	write(' /  ____  /         |    \\`\\.__/-~~   \\  |_/"  /          \\/"                       '),nl,
+	write('/-"~    ~~~~~---__  |     ~-/~         ( )   /"        _--~`                            '),nl,
+	write('                  \\_|      /        _) | ;  ),   __--~~                                '),nl,
+	write('                    "~~--_/      _-~/- |/ \\   "-~ \\                                   '),nl,
+	write('                   {\\__--_/}    / \\_>-|)<__\\      \\                                 '),nl,
+	write('                   /"   (_/  _-~  | |__>--<__|      |                                   '),nl,
+	write('                  |   _/) )-~     | |__>--<__|      |                                   '),nl,
+	write('                  / /~ ,_/       / /__>---<__/      |                                   '),nl,
+	write('                 o-o _//        /-~_>---<__-~      /                                    '),nl,
+	write('                 (^(~          /~_>---<__-      _-~                                     '),nl,
+	write('                ,/|           /__>--<__/     _-~                                        '),nl,
+	write('             ,//("(          |__>--<__|     /                  .----_                   '),nl,
+	write('            ( ( "))          |__>--<__|    |                 /" _---_~\\                '),nl,
+	write('         `-)) )) (           |__>--<__|    |               /"  /     ~\\`\\             '),nl,
+	write('        ,/,"//( (             \\__>--<__\\    \\            /"  //        ||            '),nl,
+	write('      ,( ( ((, ))              ~-__>--<_~-_  ~--____---~" _/"/        /"                '),nl,
+	write('    `~/  )` ) ,/|                 ~-_~>--<_/-__       __-~ _/                           '),nl,
+	write('  ._-~//( )/ )) `                    ~~-"_/_/ /~~~~~~~__--~                             '),nl,
+	write('   ;"( ")/ ,)(                              ~~~~~~~~~~                                  '),nl,
+	write('  " ") "( (/                                                                            '),nl,
+	write('    "   "  `                                                                            '),nl.
 
