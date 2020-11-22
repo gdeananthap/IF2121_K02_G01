@@ -175,69 +175,52 @@ initDungeon :-
 	random(2,B,Y),
 	asserta(koordinatD(X,Y)).
 
-initSlime :-
+generateSlime :-
 	dimensi(A,B),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
-	asserta(koordinatSlime(X,Y)),
-	random(2,A,X),
-	random(2,B,Y),
+	A1 is A-1,
+	B1 is B-1,
+	random(2,A1,X),
+	random(2,B1,Y),
 	asserta(koordinatSlime(X,Y)).
+	
+initSlime :-
+	generateSlime,
+	generateSlime,
+	generateSlime,
+	generateSlime,
+	generateSlime,
+	generateSlime,
+	generateSlime,
+	generateSlime.
 
+
+generateGoblin :-
+	dimensi(A,B),
+	A1 is A-1,
+	B1 is B-1,
+	random(2,A1,X),
+	random(2,B1,Y),
+	asserta(koordinatGoblin(X,Y)).
 
 initGoblin :-
+	generateGoblin,
+	generateGoblin,
+	generateGoblin,
+	generateGoblin.
+
+generateWolf :-
 	dimensi(A,B),
-	random(2,A,X),
-	random(2,B,Y),
-	random(2,A,X1),
-	random(2,A,X2),
-	random(2,A,X3),
-	random(2,B,Y1),
-	random(2,B,Y2),
-	random(2,B,Y3),
-	asserta(koordinatGoblin(X,Y)),
-	asserta(koordinatGoblin(X1,Y1)),
-	asserta(koordinatGoblin(X2,Y2)),
-	asserta(koordinatGoblin(X3,Y3)).
+	A1 is A-1,
+	B1 is B-1,
+	random(2,A1,X),
+	random(2,B1,Y),
+	asserta(koordinatWolf(X,Y)).
 
 initWolf :-
-	dimensi(A,B),
-	random(2,A,X),
-	random(2,B,Y),
-	random(2,A,X1),
-	random(2,A,X2),
-	random(2,A,X3),
-	random(2,B,Y1),
-	random(2,B,Y2),
-	random(2,B,Y3),
-	asserta(koordinatWolf(X,Y)),
-	asserta(koordinatWolf(X1,Y1)),
-	asserta(koordinatWolf(X2,Y2)),
-	asserta(koordinatWolf(X3,Y3)).
+	generateWolf,
+	generateWolf,
+	generateWolf,
+	generateWolf.
 
 initMap :-
 	initDimensi,
