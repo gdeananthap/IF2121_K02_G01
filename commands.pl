@@ -106,7 +106,8 @@ a :-
 	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu bertemu dengan Slime!'),!.
+	write('Kamu bertemu dengan Slime!'),
+	enemyTriggered(slime), !.
 
 a :-
 	koordinatP(X,Y),
@@ -114,7 +115,8 @@ a :-
 	posisiGoblin(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu bertemu dengan Goblin!'),!.
+	write('Kamu bertemu dengan Goblin!'),
+	enemyTriggered(goblin), !.
 
 a :-
 	koordinatP(X,Y),
@@ -122,7 +124,8 @@ a :-
 	posisiWolf(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu bertemu dengan Wolf!'),!.
+	write('Kamu bertemu dengan Wolf!'),
+	enemyTriggered(wolf), !.
 	
 a :-
 	koordinatP(X,Y),
@@ -170,7 +173,8 @@ w :-
 	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu bertemu dengan Slime!'),!.
+	write('Kamu bertemu dengan Slime!'),
+	enemyTriggered(slime), !.
 
 w :-
 	koordinatP(X,Y),
@@ -178,7 +182,8 @@ w :-
 	posisiGoblin(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu bertemu dengan Goblin!'),!.
+	write('Kamu bertemu dengan Goblin!'),
+	enemyTriggered(goblin), !.
 
 w :-
 	koordinatP(X,Y),
@@ -186,7 +191,8 @@ w :-
 	posisiWolf(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu bertemu dengan Wolf!'),!.
+	write('Kamu bertemu dengan Wolf!'),
+	enemyTriggered(wolf), !.
 	
 w :-
 	koordinatP(X,Y),
@@ -300,19 +306,22 @@ teleport(X,Y) :-
 	posisiSlime(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Kamu bertemu dengan Slime!'),!.
+	write('Teleportasi berhasil. Kamu bertemu dengan Slime!'),
+	enemyTriggered(slime), !.
 
 teleport(X,Y) :-
 	posisiGoblin(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Kamu bertemu dengan Goblin!'),!.
+	write('Teleportasi berhasil. Kamu bertemu dengan Goblin!'),
+	enemyTriggered(goblin), !.
 
 teleport(X,Y) :-
 	posisiWolf(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Kamu bertemu dengan Wolf!'),!.
+	write('Teleportasi berhasil. Kamu bertemu dengan Wolf!'),
+	enemyTriggered(wolf), !.
 
 map :-
 	writeC(0,0), nl, nl,
