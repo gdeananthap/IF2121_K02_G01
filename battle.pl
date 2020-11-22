@@ -6,7 +6,7 @@
 :- dynamic(turn/1).
 
 enemyTriggered(Name) :-
-    enemy(Name, Attack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level),
+    enemy(Name, Attack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level),nl,
     asserta(enemyMatched(Name, Attack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level)),
     write('Apa yang akan kamu lakukan?'), nl,
     write('- fight'), nl,
@@ -107,7 +107,7 @@ attackWords :-
 /* **** MUSUH SUDAH MATI **** */
 attackWords :-
     enemyMatched(Name, _, _, _, EnemyCurrentHP, Expgained, Goldgained, _),
-    player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack),
+    player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest),
     EnemyCurrentHP =< 0,
     write(Name), write(' berhasil dikalahkan!'), nl,
     ((Name == boss) ->
@@ -117,8 +117,8 @@ attackWords :-
         NExp is Exp + Expgained,
         NGold is Gold + Goldgained,
         NCurrentHealth is MaxHealth,
-        retract(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
-        asserta(player(X, Level, Y, NExp, NGold, MaxHealth, NCurrentHealth, Attack, Defense, SpecialAttack))
+        retract(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
+        asserta(player(X, Level, Y, NExp, NGold, MaxHealth, NCurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest))
     ), !.
 
 /* **** BELUM KETEMU ENEMY **** */
@@ -132,7 +132,7 @@ attack :-
 attack :-
     isEnemyAlive(_),
     turn(X),
-    player(_, _, _, _, _, _, _, Attack, _, _),
+    player(_, _, _, _, _, _, _, Attack, _, _,_),
     enemyMatched(Name, Attack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level),
     Damage is Attack-(Defense//2),
     NEnemyCurrentHP is EnemyCurrentHP - Damage,

@@ -7,7 +7,7 @@ store :-
     !,fail.
 
 store :-
-    player(NameP,_,_,_,_,_,_,_,_,_),
+    player(NameP,_,_,_,_,_,_,_,_,_,_),
     asserta(isStore(1)),
     repeat,
     write('Selamat datang di Store, '), write(NameP), nl,
@@ -49,7 +49,7 @@ gacha :-
 
 gacha :-
     isStore(_),
-    player(_,_,_,_,Gold,_,_,_,_,_),
+    player(_,_,_,_,Gold,_,_,_,_,_,_),
     Gold < 1000,
     write('Gold Anda tidak cukup untuk melakukan Gacha!'),nl,
     write('Farming dulu broo'),nl,!,fail.
@@ -62,10 +62,10 @@ gacha :-
 
 gacha :-
     isStore(_),
-    player(_,_,_,_,Gold,_,_,_,_,_),
+    player(_,_,_,_,Gold,_,_,_,_,_,_),
     NewGold is Gold - 1000,
-    retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
-    asserta(player(Name, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
+    retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
+    asserta(player(Name, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
     random(1,10,X),
     ( (X =< 4) ->
         random(1,6,Y),
@@ -206,7 +206,7 @@ buy(Name) :-
 
 buy(Name) :-
     isStore(_),
-    player(_,_,_,_,Gold,_,_,_,_,_),
+    player(_,_,_,_,Gold,_,_,_,_,_,_),
     item(_,Name,_,_,_,_,_,_,_,Price),
     Gold < Price,
     write('Gold Anda tidak cukup untuk membeli '), write(Name), nl,
@@ -222,13 +222,13 @@ buy(Name) :-
     isStore(_),
     item(ID,Name,_,_,_,_,_,_,_,Price),
     addInventory(ID),
-    player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack),
+    player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest),
     NewGold is Gold-Price,
     write(Name), write(' berhasil dibeli'), nl,
-    write(Name), write(' berhasil ditambahkan ke Inventory Anda.'),
+    write(Name), write(' berhasil ditambahkan ke Inventory Anda.'),nl,
     write('Jumlah gold anda sekarang adalah '), write(NewGold), write(' gold.'),nl,
-    retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
-    asserta(player(NameP, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),!.
+    retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
+    asserta(player(NameP, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),!.
 
 sell(_) :-
     \+isStore(_),
@@ -245,7 +245,7 @@ sell(Name) :-
 
 sell(Name) :-
     isStore(_),
-    player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack),
+    player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest),
     inventory(ID,Name,_,_,_,_,_,_,_,Price,Count),
     NewCount is Count - 1,
     (   NewCount =:= 0 ->
@@ -256,8 +256,8 @@ sell(Name) :-
     NewGold is Gold+Price,
     write('Items berhasil dijual'), nl,
     write('Jumlah gold anda sekarang adalah '), write(NewGold), write(' gold.'),nl,
-    retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
-    asserta(player(NameP, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),!.
+    retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
+    asserta(player(NameP, Level, Job, Exp, NewGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),!.
 
 commonAnimation :-
     write('               ######   #######  ##     ## ##     ##  #######  ##    ## '),nl,

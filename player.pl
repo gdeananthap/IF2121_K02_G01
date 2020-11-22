@@ -1,9 +1,9 @@
-:- dynamic(player/10).       /* Player Status */
+:- dynamic(player/11).       /* Player Status */
 :- dynamic(playerEquipment/3). /* Player Equipment */ 
 :- dynamic(inventory/11). /* inventory(NamaItem) */
 
 /** Player Status **/
-/** player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack) **/
+/** player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest) **/
 initPlayer :-
     write('Selamat Datang di NinoKuni, Pahlawan!'), nl,
     chooseName(X),
@@ -17,11 +17,12 @@ initPlayer :-
         Attack is 70, %udah ditambah stat dari basic weapon
         Defense is 80,
         SpecialAttack is 120,
-        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
+        ActiveQuest is 0,
+        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(playerEquipment('Wooden Sword', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
         asserta(koordinatP(1,1)),
-        write('Selamat Berjuang Pahlawan '), write(X), write(' '), nl,!
+        write('Selamat Berjuang Pahlawan '), write(X), write(' !'), nl,!
     ;(Y == archer) ->
         Level is 1, 
         MaxHealth is 100,
@@ -29,22 +30,24 @@ initPlayer :-
         Attack is 90, %udah ditambah stat dari basic weapon
         Defense is 60,
         SpecialAttack is 160,
-        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
+        ActiveQuest is 0,
+        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(playerEquipment('Wooden Bow', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
         asserta(koordinatP(1,1)),
-        write('Selamat Berjuang Pahlawan '), write(X), write(' '), nl,!
+        write('Selamat Berjuang Pahlawan '), write(X), write(' !'), nl,!
     ;   Level is 1,
         MaxHealth is 120,
         CurrentHealth is MaxHealth,
         Attack is 90, %udah ditambah stat dari basic weapon
         Defense is 40,
         SpecialAttack is 160,
-        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack)),
+        ActiveQuest is 0,
+        asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(playerEquipment('Wooden Staff', none, none)),
         addInventory(34), addInventory(34), addInventory(34), addInventory(34), addInventory(34),
         asserta(koordinatP(1,1)),
-        write('Selamat Berjuang Pahlawan '), write(X), write(' '), nl,!   
+        write('Selamat Berjuang Pahlawan '), write(X), write(' !'), nl,!   
     ).
 	
 chooseName(X) :-
@@ -62,7 +65,7 @@ chooseJob(X, Y) :-
     ).
 
 status :-
-    player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack),
+    player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, _),
     playerEquipment(Weapon, Armor, Accessory),
     write('Player Status'), nl,
     write('Nama           : '), write(Name),nl,
@@ -98,7 +101,7 @@ use(X) :-
     ).
 
 usePotion(ID) :-
-    player(NameP,_,Job,_,_,MaxHealth,CurrentHealth, Attack, Defense,_),
+    player(NameP,_,Job,_,_,MaxHealth,CurrentHealth, Attack, Defense,_,_),
     inventory(ID, _,_,_,_, AddAttack, AddDefense, _, AddCurrentHP, _, Count),
     NewAttack is Attack+AddAttack,
     NewDefense is Defense+AddDefense,
@@ -109,11 +112,11 @@ usePotion(ID) :-
     ),
     NewCount is Count-1,
     ((NewCount =:= 0) -> 
-        retract(player(NameP, Level, Job, Exp, Gold, MaxHealth,_,_,_,SpecialAttack)),
-        asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, NewCurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+        retract(player(NameP, Level, Job, Exp, Gold, MaxHealth,_,_,_,SpecialAttack,ActiveQuest)),
+        asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, NewCurrentHealth, NewAttack, NewDefense, SpecialAttack,ActiveQuest)),
         retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-    ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth,_,_,_,SpecialAttack)),
-        asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, NewCurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+    ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth,_,_,_,SpecialAttack,ActiveQuest)),
+        asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, NewCurrentHealth, NewAttack, NewDefense, SpecialAttack,ActiveQuest)),
         retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
         assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
     ).
@@ -145,14 +148,14 @@ useTeleport(ID) :-
     ).
     
 equip(ID) :-
-    player(_,_,Job,_,_,_,_,_,_,_),
+    player(_,_,Job,_,_,_,_,_,_,_,_),
     item(ID, X,_,_,Class,_,_,_,_,_),
     \+(Job == Class),
     write(X), write(' tidak bisa digunakan karena tidak sesuai dengan Job Anda!'), nl,
     !,fail.
 
 equip(ID) :-
-    player(NameP,_,Job,_,_,MaxHealth,_, Attack, Defense,_),
+    player(NameP,_,Job,_,_,MaxHealth,_, Attack, Defense,_,_),
     inventory(ID, Name,Type,_,_, AddAttack, AddDefense, AddMaxHP, _, _, Count),
     playerEquipment(CurrentWeapon, CurrentArmor, CurrentAccessory),
     ( (Type == weapon) ->
@@ -164,11 +167,11 @@ equip(ID) :-
             asserta(playerEquipment(Name, CurrentArmor, CurrentAccessory)),
             NewCount is Count-1,
             ((NewCount =:= 0) -> 
-                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack,ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack,ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack,ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
                 assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
             ) 
@@ -181,11 +184,11 @@ equip(ID) :-
             asserta(playerEquipment(Name, CurrentArmor, CurrentAccessory)),
             NewCount is Count-1,
             ((NewCount =:= 0) -> 
-                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack,ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack,ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
                 assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
             ) 
@@ -199,11 +202,11 @@ equip(ID) :-
             asserta(playerEquipment(CurrentWeapon, Name, CurrentAccessory)),
             NewCount is Count-1,
             ((NewCount =:= 0) -> 
-                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
                 assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
             ) 
@@ -216,11 +219,11 @@ equip(ID) :-
             asserta(playerEquipment(CurrentWeapon, Name, CurrentAccessory)),
             NewCount is Count-1,
             ((NewCount =:= 0) -> 
-                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
                 assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
             ) 
@@ -233,11 +236,11 @@ equip(ID) :-
             asserta(playerEquipment(CurrentWeapon, CurrentArmor, Name)),
             NewCount is Count-1,
             ((NewCount =:= 0) -> 
-                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
                 assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
             ) 
@@ -250,11 +253,11 @@ equip(ID) :-
             asserta(playerEquipment(CurrentWeapon, CurrentArmor, Name)),
             NewCount is Count-1,
             ((NewCount =:= 0) -> 
-                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+                retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack)),
-                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack)),
+            ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
+                asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
                 assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
             ) 
