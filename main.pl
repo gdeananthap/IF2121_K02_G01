@@ -1,3 +1,5 @@
+:- dynamic(started/1).
+
 :- include('map.pl').
 :- include('enemy.pl').
 :- include('commands.pl').

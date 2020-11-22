@@ -1,7 +1,17 @@
 start :-
+	\+started(_),
+	asserta(started(1)),
 	initPlayer,
 	initMap,
 	map.
+	
+start :-
+	started(_),
+	write('Ini udah mulai broo ._.').
+
+d :-
+	\+started(_),
+	write('Tolong di start dulu mas/mbak...'),!.
 
 d :-
 	koordinatP(X,Y),
@@ -68,6 +78,11 @@ d :-
 	tembokKanan(NewX,Y); 
 	tembokTengah(NewX,Y)),
 	write('Kamu nabrak tembok...'),!.
+	
+	
+a :-
+	\+started(_),
+	write('Tolong di start dulu mas/mbak...'),!.
 	
 a :-
 	koordinatP(X,Y),
@@ -136,6 +151,11 @@ a :-
 	),
 	write('Kamu nabrak tembok...'),!.
 
+
+w :-
+	\+started(_),
+	write('Tolong di start dulu mas/mbak...'),!.
+
 w :-
 	koordinatP(X,Y),
 	NewY is Y-1,
@@ -202,6 +222,11 @@ w :-
 	tembokTengah(X,NewY)
 	),
 	write('Kamu nabrak tembok...'),!.
+	
+
+s :-
+	\+started(_),
+	write('Tolong di start dulu mas/mbak...'),!.
 	
 s :-
 	koordinatP(X,Y),
@@ -272,6 +297,7 @@ s :-
 	),
 	write('Kamu nabrak tembok...'),!.
 	
+	
 teleport(X,Y) :-
 	\+tembokBawah(X,Y),
 	\+tembokAtas(X,Y),
@@ -324,9 +350,15 @@ teleport(X,Y) :-
 	enemyTriggered(wolf), !.
 
 map :-
+	\+started(_),
+	write('Tolong di start dulu mas/mbak...'),!.
+
+map :-
 	writeC(0,0), nl, nl,
 	write('Legend'), nl,
 	write('P: Player'), nl,
 	write('S: Store'), nl,
 	write('Q: Quest'), nl,
 	write('D: Dungeon Boss'), nl,!.
+	
+
