@@ -7,3 +7,4 @@
 :- include('items.pl').
 :- include('store.pl').
 :- include('battle.pl').
+:- include('leveling.pl').
