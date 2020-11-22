@@ -50,7 +50,7 @@ d :-
 	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	slimeAnimetion,
+	slimeAnimation,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -124,7 +124,7 @@ a :-
 	posisiSlime(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	slimeAnimetion,
+	slimeAnimation,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -199,7 +199,7 @@ w :-
 	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	slimeAnimetion,
+	slimeAnimation,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
@@ -275,7 +275,7 @@ s :-
 	posisiSlime(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	slimeAnimetion,
+	slimeAnimation,
 	write('Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime),
 	!.
@@ -344,7 +344,7 @@ teleport(X,Y) :-
 	posisiSlime(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	slimeAnimetion,
+	slimeAnimation,
 	write('Teleportasi berhasil. Kamu bertemu dengan Slime!'),
 	enemyTriggered(slime), !.
 
