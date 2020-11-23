@@ -106,7 +106,7 @@ use(X) :-
     isEnemyAlive(_),
     ((Type == potion) -> 
         usePotion(ID),!
-    ; (Type == scroll) ->  
+    ; 
         write('Kamu tidak bisa menggunakan scroll saat bertarung.'), nl
     ).
 
