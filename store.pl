@@ -29,15 +29,19 @@ store :-
         write('c. Defense Potion       (250  gold)'),nl,
         write('d. Teleportation Scroll (1000 gold)'),nl,
         write('Ketik X diantara tanda petik untuk membeli X'), nl,
+        write('Contoh : \'Healing Potion\' , untuk membeli healing potion'), nl,
         read(Y),
         buy(Y), nl, fail
     ; (X =:= 3) ->
         bag,
+        write('Jika Anda menjual item X anda hanya akan mendapatkan 80% gold dari harga aslinya!'), nl,
         write('Ketik X diantara tanda petik untuk menjual X'), nl,
+        write('Contoh : \'Healing Potion\' , untuk menjual healing potion'), nl,
         read(Y),
         sell(Y), nl, fail
     ; (X =:= 4) ->
-        write('Masukkan angka 1-5 untuk berinteraksi dengan Store!'), nl, nl, fail
+        write('Masukkan angka 1-5 untuk berinteraksi dengan Store!'), nl,
+        write('Contoh : 1. '), nl, nl, fail
     ;   write('Terimakasih sudah mengunjungi Store! :D'),nl,
         retract(isStore(_)),!
     ).
@@ -253,7 +257,8 @@ sell(Name) :-
     ;   retract(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
         assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack, AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount))
     ),
-    NewGold is Gold+Price,
+    NewPrice is round(Price*80/100),
+    NewGold is Gold+NewPrice,
     write('Items berhasil dijual'), nl,
     write('Jumlah gold anda sekarang adalah '), write(NewGold), write(' gold.'),nl,
     retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),

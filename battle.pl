@@ -94,13 +94,13 @@ fight :-
 cont :-
     turn(X),
     ((X mod 3 =:= 0) ->
-        write('Sekarang giliranmu, Apa yang kamu mau lakukan?'), nl,
+        nl,write('Sekarang giliranmu, Apa yang kamu mau lakukan?'), nl,
         write('- attack'), nl,
         write('- special'), nl, 
         write('- use(item)'), nl,
         write('Kamu bisa menggunakannya special attack kali ini! Jangan sia-siakan kesempatan ini!'), nl
     ;
-        write('Sekarang giliranmu, Apa yang kamu mau lakukan?'), nl,
+        nl,write('Sekarang giliranmu, Apa yang kamu mau lakukan?'), nl,
         write('- attack'), nl,
         write('- special'), nl, 
         write('- use(item)'), nl,
@@ -133,7 +133,7 @@ attackWords :-
         retract(turn(_)),
         write('Selamat kamu berhasil memenangkan permainan ini!'), nl
     ;   
-        write('Kamu berhasil mendapatkan '), write(Expgained), write('EXP dan '), write(Goldgained), write('Gold!'), nl,
+        write('Kamu berhasil mendapatkan '), write(Expgained), write(' EXP dan '), write(Goldgained), write(' Gold!'), nl,
         NExp is Exp + Expgained,
         NGold is Gold + Goldgained,
         NCurrentHealth is MaxHealth,
@@ -147,7 +147,7 @@ attackWords :-
         retractall(enemyturn(_)),
         retractall(turn(_)),
         levelUpMarker(X, Level, NExp),
-        kill(Name),
+        kill(Name)
     ), !.
 
 /* **** BELUM KETEMU ENEMY **** */

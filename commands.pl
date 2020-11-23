@@ -35,7 +35,8 @@ d :-
 	posisiS(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu berada di Store.'),!.
+	write('Kamu berada di Store.'), nl,
+	write('Ketik store. untuk mengakses store'),nl,!.
 	
 d :-
 	koordinatP(X,Y),
@@ -46,7 +47,7 @@ d :-
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
-	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	write('ketik quest. untuk mengambil quest.'), nl,
 	!.
 
 d :-
@@ -113,7 +114,8 @@ a :-
 	posisiS(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu berada di Store.'),!.
+	write('Kamu berada di Store.'),nl,
+	write('Ketik store. untuk mengakses store'),nl,!.
 	
 a :-
 	koordinatP(X,Y),
@@ -124,7 +126,7 @@ a :-
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
-	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	write('ketik quest. untuk mengambil quest.'), nl,
 	!.
 
 a :-
@@ -192,7 +194,8 @@ w :-
 	posisiS(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu berada di Store.'),!.
+	write('Kamu berada di Store.'),nl,
+	write('Ketik store. untuk mengakses store'),nl,!.
 	
 w :-
 	koordinatP(X,Y),
@@ -203,7 +206,7 @@ w :-
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
-	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	write('ketik quest. untuk mengambil quest.'), nl,
 	!.
 
 w :-
@@ -271,8 +274,8 @@ s :-
 	posisiS(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu berada di Store.'),
-	write('Ketik store untuk mengakses store'),!.
+	write('Kamu berada di Store.'), nl,
+	write('Ketik store. untuk mengakses store'),nl,!.
 	
 s :-
 	koordinatP(X,Y),
@@ -283,7 +286,7 @@ s :-
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
-	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	write('ketik quest. untuk mengambil quest.'), nl,
 	!.
 
 s :-
@@ -348,7 +351,7 @@ teleport(X,Y) :-
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
 	write('Teleportasi berhasil. Kamu berada di Store.'),nl,
-	write('Ketik store untuk mengakses store'),!.
+	write('Ketik store. untuk mengakses store'),nl,!.
 	
 teleport(X,Y) :-
 	posisiQ(X,Y),
@@ -357,7 +360,7 @@ teleport(X,Y) :-
 	write('Teleportasi berhasil. Kamu berada di Quest.'),nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
-	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	write('ketik quest. untuk mengambil quest.'), nl,
 	!.
 
 

@@ -67,13 +67,13 @@ quest :-
     !,fail.
 
 quest :-
-	availQuest(CurrentQuest, IsActive),
+	availQuest(_, IsActive),
 	IsActive =:= 1,
 	write('Selesaikan quest yang telah diambil terlebih dahulu!'), nl,
 	!,fail.
 
 quest :-
-	availQuest(CurrentQuest, IsActive),
+	availQuest(CurrentQuest, _),
 	CurrentQuest =:= 11,
 	write('Semua quest telah selesai!'), nl,
 	!,fail.
@@ -84,12 +84,12 @@ quest :-
 	TempQuest is CurrentQuest,
 	TempActive is 1, A is 0, B is 0, C is 0,
 	write('Kamu telah mengambil quest '), write(CurrentQuest), write('!'), nl,
-	write('Ketik \'infoQuest.\' untuk melihat quest.'),
-	retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
+	write('Ketik infoQuest. untuk melihat quest.'),
+	retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, _)),
 	asserta(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, TempQuest)),
 	retract(availQuest(CurrentQuest, IsActive)),
 	asserta(availQuest(CurrentQuest, TempActive)),
-	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
+	retract(killCount(_,_,_)),
 	asserta(killCount(A, B, C)), !.
 
 /* reward(QuestID, PlusExp, PlusGold)*/
@@ -119,7 +119,7 @@ questRewarding(Name) :-
 	write(' Exp: '), write(Exp), write('+'), write(PlusExp), nl,
 	retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
 	asserta(player(Name, Level, Job, TempExp, TempGold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, TempQuest)),
-	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
+	retract(killCount(_,_,_)),
 	asserta(killCount(A, B, C)),
 	retract(availQuest(CurrentQuest, IsActive)),
 	asserta(availQuest(NextQuest, TempActive)),
@@ -127,90 +127,88 @@ questRewarding(Name) :-
 
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 1,
 	(KilledSlime > 0; KilledGoblin > 0; KilledWolf > 0),
-	write('Quest 1 finished!'),
+	write('Quest 1 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),	
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 2,
 	KilledSlime >= 2, KilledGoblin >= 0, KilledWolf >= 1,
-	write('Quest 2 finished!'),
+	write('Quest 2 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 3,
 	KilledSlime >= 0, KilledGoblin >= 2, KilledWolf >= 1,
-	write('Quest 3 finished!'),
+	write('Quest 3 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 4,
 	KilledSlime >= 2, KilledGoblin >= 1, KilledWolf >= 1,
-	write('Quest 4 finished!'),
+	write('Quest 4 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 5,
 	KilledSlime >= 1, KilledGoblin >= 2, KilledWolf >= 1,
-	write('Quest 5 finished!'),
+	write('Quest 5 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
-	killCount(KilledSlime, KilledGoblin, KilledWolf),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 6,
 	KilledSlime >= 1, KilledGoblin >= 2, KilledWolf >= 2,
-	write('Quest 6 finished!'),
+	write('Quest 6 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 7,
 	KilledSlime >= 3, KilledGoblin >= 2, KilledWolf >= 1,
-	write('Quest 7 finished!'),
+	write('Quest 7 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
-	killCount(KilledSlime, KilledGoblin, KilledWolf),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 8,
 	KilledSlime >= 2, KilledGoblin >= 3, KilledWolf >= 1,
-	write('Quest 8 finished!'),
+	write('Quest 8 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 9,
 	KilledSlime >= 1, KilledGoblin >= 2, KilledWolf >= 3,
-	write('Quest 9 finished!'),
+	write('Quest 9 finished!'),nl,
 	questRewarding(Name), !.
 
 questMarker(Name) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,ActiveQuest),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	ActiveQuest =:= 10,
 	KilledSlime >= 3, KilledGoblin >= 3, KilledWolf >= 3,
-	write('You have finished all quests!'),
+	write('You have finished all quests!'),nl,
 	questRewarding(Name), !.
 
 
 /* debug */
 
 kill(slime) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,_),	
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	TempKill is KilledSlime+1,
 	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
@@ -218,7 +216,7 @@ kill(slime) :-
 	questMarker(Name).
 
 kill(goblin) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,_),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	TempKill is KilledGoblin+1,
 	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
@@ -226,7 +224,7 @@ kill(goblin) :-
 	questMarker(Name).
 
 kill(wolf) :-
-	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
+	player(Name,_,_,_,_,_,_,_,_,_,_),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	TempKill is KilledWolf+1,
 	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
