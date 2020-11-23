@@ -107,7 +107,7 @@ use(X) :-
     ((Type == potion) -> 
         usePotion(ID),!
     ; (Type == scroll) ->  
-        write('Kamu tidak bisa menggunakan scroll saat bertarung.'), nl,
+        write('Kamu tidak bisa menggunakan scroll saat bertarung.'), nl
     ).
 
 usePotion(ID) :-
