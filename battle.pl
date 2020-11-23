@@ -122,7 +122,6 @@ attackWords :-
     enemyMatched(Name, _, _, _, EnemyCurrentHP, Expgained, Goldgained, _),
     player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest),
     EnemyCurrentHP =< 0,
-    retract(isEnemyAlive(Name)),
     write(Name), write(' berhasil dikalahkan!'), nl,
     ((Name == boss) ->
         win,
@@ -141,12 +140,12 @@ attackWords :-
         retract(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
         asserta(player(X, Level, Y, NExp, NGold, MaxHealth, NCurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest)),
         randomizeEnemy,
-        retract(isEnemyAlive(_)),
-        retract(enemyMatched(_,_,_,_,_,_,_,_)), 
-        retract(isFight(_)),
-        retract(isRun(_)),
-        retract(enemyturn(_)),
-        retract(turn(_)),
+        retractall(isEnemyAlive(_)),
+        retractall(enemyMatched(_,_,_,_,_,_,_,_)), 
+        retractall(isFight(_)),
+        retractall(isRun(_)),
+        retractall(enemyturn(_)),
+        retractall(turn(_)),
         levelUpMarker(X, Level, NExp)
     ), !.
 
@@ -238,7 +237,7 @@ enemyAttackWords :-
     !.
 
 enemyAttackWords :-
-    player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack,ActiveQuest),
+    player(_, _, _, _, _, _, CurrentHealth, _, _, _, _),
     CurrentHealth =< 0,
     lose,
     retract(isEnemyAlive(_)),
@@ -247,6 +246,7 @@ enemyAttackWords :-
     retract(isRun(_)),
     retract(enemyturn(_)),
     retract(turn(_)),
+    quit,
     write('HP kamu 0. Kamu kalah! Ketik start. untuk memulai kembali permainan!'), nl, 
     !.
 

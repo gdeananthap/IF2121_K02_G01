@@ -233,9 +233,9 @@ initMap :-
 	initTembok.
 
 randomizeEnemy :-
-	retractall(koordinatSlime),
-	retractall(koordinatGoblin),
-	retractall(koordinatWolf),
+	retractall(koordinatSlime(_,_)),
+	retractall(koordinatGoblin(_,_)),
+	retractall(koordinatWolf(_,_)),
 	initSlime,
 	initGoblin,
 	initWolf.

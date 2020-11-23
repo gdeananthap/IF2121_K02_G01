@@ -6,10 +6,10 @@
 /* Enemy(Name, Attack, Special, Defense, MaxHP, EXPGained, goldGained, Level) */
 :- dynamic(enemy/8).
 
-enemy(slime, 50, 70, 40, 80, 3, 15, 1).
-enemy(goblin, 70, 90, 35, 80, 3, 20, 1).
-enemy(wolf, 80, 100, 40, 90, 5, 35, 1).
-enemy(boss, 300, 350, 320, 500, 100, 1000, 1).
+enemy(slime, 50, 70, 40, 80, 3, 150, 1).
+enemy(goblin, 70, 90, 35, 80, 3, 200, 1).
+enemy(wolf, 80, 100, 40, 90, 5, 350, 1).
+enemy(boss, 300, 350, 320, 500, 100, 10000, 1).
 
 enemyLevelUp(Name) :-
     enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level),
@@ -21,28 +21,28 @@ enemyLevelUp(Name) :-
     ((Name == slime) ->
         ((Nlevel =:= 2) ->
             Nexp is Expgained+5,
-            Ngold is 15 * Nlevel,
+            Ngold is 150 * Nlevel,
             retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
             asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
         ;   Nexp is 2^(Nlevel-2) * 4,
-            Ngold is 15 * Nlevel,
+            Ngold is 150 * Nlevel,
             retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
             asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
         )
     ; (Name == goblin) ->
         ((Nlevel =:= 2) ->
             Nexp is Expgained+5,
-            Ngold is 20 * Nlevel,
+            Ngold is 200 * Nlevel,
             retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
             asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
         ;   Nexp is 2^(Nlevel-2) * 4,
-            Ngold is 20 * Nlevel,
+            Ngold is 200 * Nlevel,
             retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
             asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
         )
     ; (Name == wolf) ->
         Nexp is 2^(Nlevel-2) * 10,
-        Ngold is 35 * Nlevel,
+        Ngold is 350 * Nlevel,
         retract(enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level)),
         asserta(enemy(Name, Nattack, Nspecial, Ndefense,NmaxHP, Nexp, Ngold, Nlevel)), !
     ).

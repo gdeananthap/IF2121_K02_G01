@@ -3,7 +3,7 @@ start :-
 	asserta(started(1)),
 	initPlayer,
 	initMap,
-	map.
+	map, !.
 	
 start :-
 	started(_),
@@ -376,6 +376,21 @@ map :-
 	write('Q: Quest'), nl,
 	write('D: Dungeon Boss'), nl,!.
 
+quit :- 
+	retractall(started(_)),
+	retractall(koordinatP(_,_)),
+	retractall(koordinatS(_,_)),
+	retractall(koordinatQ(_,_)),
+	retractall(koordinatD(_,_)),
+	retractall(koordinatSlime(_,_)),
+	retractall(koordinatGoblin(_,_)),
+	retractall(koordinatWolf(_,_)),
+	retractall(dimensi(_, _)),
+	retractall(tembok(_,_)),
+	retractall(player(_, _, _, _, _, _, _, _, _, _, _)),
+	retractall(playerEquipment(_, _, _)),
+	retractall(inventory(_, _, _, _, _, _, _, _, _, _, _)),
+	retractall(enemy(_, _, _, _, _, _, _, _)), !.
 
 slimeAnimation :-
 	write('              .-~~~-.                '),nl,
