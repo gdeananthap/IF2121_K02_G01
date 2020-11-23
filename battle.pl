@@ -9,13 +9,22 @@
 enemyTriggered(Name) :-
     enemy(Name, Attack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level),nl,
     asserta(enemyMatched(Name, Attack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level)),
-    write('Apa yang akan kamu lakukan?'), nl,
-    write('- fight'), nl,
-    write('- run'), nl,
-    write('Ketik pilihanmu diakhiri dengan titik, contoh: fight.'), nl,
-    random(1, 10, X),
-    asserta(peluangRun(X)),
-    asserta(isEnemyAlive(Name)).
+    ((Name == boss) ->
+        write('Selamat datang di Boss Dungeon!'), nl,
+        write('Disini kamu tidak bisa lari dari hadapanku, HAHAHAHA~~'), nl,
+        asserta(peluangRun(0)),
+        asserta(isEnemyAlive(Name)),
+        asserta(isRun(1)),
+        fight
+    ;
+        write('Apa yang akan kamu lakukan?'), nl,
+        write('- fight'), nl,
+        write('- run'), nl,
+        write('Ketik pilihanmu diakhiri dengan titik, contoh: fight.'), nl,
+        random(1, 10, X),
+        asserta(peluangRun(X)),
+        asserta(isEnemyAlive(Name))
+    ), !.
 
 bossTriggered :-
     Name = boss,
@@ -247,7 +256,7 @@ enemyAttackWords :-
     retract(isRun(_)),
     retract(enemyturn(_)),
     retract(turn(_)),
-    quit,
+    quit, nl,
     write('HP kamu 0. Kamu kalah! Ketik start. untuk memulai kembali permainan!'), nl, 
     !.
 

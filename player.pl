@@ -93,11 +93,21 @@ use(X) :-
 
 use(X) :-
     item(ID, X, Type,_,_,_,_,_,_,_),
+    \+ isEnemyAlive(_),
     ((Type == potion) -> 
         usePotion(ID),!
     ; (Type == scroll) ->  
         useTeleport(ID),!    
     ;   equip(ID), !  
+    ).
+
+use(X) :-
+    item(ID, X, Type,_,_,_,_,_,_,_),
+    isEnemyAlive(_),
+    ((Type == potion) -> 
+        usePotion(ID),!
+    ; (Type == scroll) ->  
+        write('Kamu tidak bisa menggunakan scroll saat bertarung.'), nl,
     ).
 
 usePotion(ID) :-

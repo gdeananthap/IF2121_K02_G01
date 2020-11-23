@@ -81,6 +81,15 @@ d :-
 	wolfAnimation,
 	write('Kamu bertemu dengan Wolf!'),
 	enemyTriggered(wolf), !.
+
+d :-
+	koordinatP(X,Y),
+	NewX is X+1,
+	posisiD(NewX,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(NewX,Y)),
+	dragonAnimation,
+	enemyTriggered(boss), !.
 	
 d :-
 	koordinatP(X,Y),
@@ -166,6 +175,15 @@ a :-
 a :-
 	koordinatP(X,Y),
 	NewX is X-1,
+	posisiD(NewX,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(NewX,Y)),
+	dragonAnimation,
+	enemyTriggered(boss), !.
+
+a :-
+	koordinatP(X,Y),
+	NewX is X-1,
 	(
 	tembokKiri(NewX,Y);
 	tembokTengah(NewX,Y)
@@ -248,13 +266,21 @@ w :-
 w :-
 	koordinatP(X,Y),
 	NewY is Y-1,
+	posisiD(X,NewY),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,NewY)),
+	dragonAnimation,
+	enemyTriggered(boss), !.
+
+w :-
+	koordinatP(X,Y),
+	NewY is Y-1,
 	(
 	tembokAtas(X,NewY);
 	tembokTengah(X,NewY)
 	),
 	write('Kamu nabrak tembok...'),!.
 	
-
 s :-
 	\+started(_),
 	write('Tolong di start dulu mas/mbak...'),!.
@@ -331,6 +357,15 @@ s :-
 s :-
 	koordinatP(X,Y),
 	NewY is Y+1,
+	posisiD(X,NewY),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,NewY)),
+	dragonAnimation,
+	enemyTriggered(boss),!.
+
+s :-
+	koordinatP(X,Y),
+	NewY is Y+1,
 	(
 	tembokAtas(X,NewY);
 	tembokTengah(X,NewY)
@@ -398,6 +433,14 @@ teleport(X,Y) :-
 	asserta(koordinatP(X,Y)),
 	wolfAnimation,
 	write('Teleportasi berhasil. Kamu bertemu dengan Wolf!'),
+	enemyTriggered(wolf), !.
+
+teleport(X,Y) :-
+	posisiD(X,Y),
+	retract(koordinatP(_,_)),
+	asserta(koordinatP(X,Y)),
+	dragonAnimation,
+	write('Teleportasi berhasil.'),
 	enemyTriggered(wolf), !.
 
 map :-
