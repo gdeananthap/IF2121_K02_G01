@@ -1,6 +1,7 @@
 start :-
 	\+started(_),
 	asserta(started(1)),
+	initQuests,
 	initPlayer,
 	initMap,
 	map, !.
@@ -42,7 +43,11 @@ d :-
 	posisiQ(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu menemui sebuah Quest!'),!.
+	write('Kamu menemui sebuah Quest!'), nl,
+	availQuest(CurrentQuest, _),
+	writeQuest(CurrentQuest),
+	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	!.
 
 d :-
 	koordinatP(X,Y),
@@ -116,7 +121,11 @@ a :-
 	posisiQ(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
-	write('Kamu menemui sebuah Quest!'),!.
+	write('Kamu menemui sebuah Quest!'), nl,
+	availQuest(CurrentQuest, _),
+	writeQuest(CurrentQuest),
+	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	!.
 
 a :-
 	koordinatP(X,Y),
@@ -191,7 +200,11 @@ w :-
 	posisiQ(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu menemui sebuah Quest!'),!.
+	write('Kamu menemui sebuah Quest!'), nl,
+	availQuest(CurrentQuest, _),
+	writeQuest(CurrentQuest),
+	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	!.
 
 w :-
 	koordinatP(X,Y),
@@ -267,7 +280,11 @@ s :-
 	posisiQ(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
-	write('Kamu menemui sebuah Quest!'),!.
+	write('Kamu menemui sebuah Quest!'), nl,
+	availQuest(CurrentQuest, _),
+	writeQuest(CurrentQuest),
+	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	!.
 
 s :-
 	koordinatP(X,Y),
@@ -337,7 +354,11 @@ teleport(X,Y) :-
 	posisiQ(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Teleportasi berhasil. Kamu berada di Quest.'),nl,!.
+	write('Teleportasi berhasil. Kamu berada di Quest.'),nl,
+	availQuest(CurrentQuest, _),
+	writeQuest(CurrentQuest),
+	write('ketik \'quest.\' untuk mengambil quest.'), nl,
+	!.
 
 
 teleport(X,Y) :-

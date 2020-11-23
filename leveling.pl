@@ -18,6 +18,11 @@ playerLevelUp(Name) :-
 	NewSpAtt is (SpecialAttack+20),
 	NewMaxHealth is (MaxHealth+20),
 	NewCurrHealth is (CurrentHealth+20),
+	write(' Attack:'), write(Attack), write('+20'),nl,
+	write(' Defense:'), write(Defense), write('+20'),nl,
+	write(' Special Attack:'), write(SpecialAttack), write('+20'),nl,
+	write(' Max Health:'), write(MaxHealth), write('+20'),nl,
+	write(' Current Health:'), write(CurrentHealth), write('+20'),nl,
 	retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
 	asserta(player(Name, NextLevel, Job, NewExp, Gold, NewMaxHealth, NewCurrHealth, NewAttack, NewDefense, NewSpAtt, ActiveQuest)),
 	enemyLevelUp(slime),
@@ -92,7 +97,7 @@ levelUpMarker(Name, Level, Exp) :-
 
 tambahExp(Name):-
 	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
-	ExpPlus is Exp+7,
+	ExpPlus is Exp+1000,
 	retract(player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
 	asserta(player(Name, Level, Job, ExpPlus, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
 	levelUpMarker(Name, Level, ExpPlus).
