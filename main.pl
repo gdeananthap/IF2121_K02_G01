@@ -1,5 +1,6 @@
 :- dynamic(started/1).
 
+:- include('leveling.pl').
 :- include('map.pl').
 :- include('enemy.pl').
 :- include('commands.pl').
@@ -7,4 +8,4 @@
 :- include('items.pl').
 :- include('store.pl').
 :- include('battle.pl').
-:- include('leveling.pl').
+
