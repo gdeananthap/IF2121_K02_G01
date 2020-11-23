@@ -1,0 +1,34 @@
+dimensi(10,11).
+koordinatP(2,2).
+koordinatS(8,6).
+koordinatD(6,3).
+koordinatQ(2,8).
+koordinatSlime(5,5).
+koordinatSlime(7,2).
+koordinatSlime(3,6).
+koordinatSlime(4,3).
+koordinatSlime(5,5).
+koordinatSlime(3,5).
+koordinatSlime(4,8).
+koordinatSlime(6,8).
+koordinatGoblin(3,3).
+koordinatGoblin(6,8).
+koordinatGoblin(5,9).
+koordinatGoblin(8,7).
+koordinatWolf(2,7).
+koordinatWolf(2,5).
+koordinatWolf(2,4).
+koordinatWolf(7,3).
+tembok(8,2).
+tembok(5,9).
+tembok(4,3).
+tembok(3,4).
+tembok(7,5).
+tembok(3,5).
+tembok(6,9).
+tembok(6,2).
+tembok(7,8).
+tembok(3,9).
+playerEquipment('Wooden Bow',none,none).
+player(shifa,1,archer,5,10350,100,100,90,60,160,0).
+inventory(34, 'Healing Potion', potion, common, none, 0, 0, 0, 50, 100, 5).

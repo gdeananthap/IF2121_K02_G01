@@ -135,7 +135,7 @@ loadFile(FileName):-
 	open(FileName, read, S),
         readLines(S,Lines),
     close(S),
-    assertaLine(Lines), 
+    assertLines(Lines), 
     asserta(started(1)), !.
 
 assertLines([]) :- !.
