@@ -35,6 +35,7 @@ d :-
 	posisiS(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	storeNpc,
 	write('Kamu berada di Store.'), nl,
 	write('Ketik store. untuk mengakses store'),nl,!.
 	
@@ -44,6 +45,7 @@ d :-
 	posisiQ(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	questNpc,
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
@@ -114,6 +116,7 @@ a :-
 	posisiS(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	storeNpc,
 	write('Kamu berada di Store.'),nl,
 	write('Ketik store. untuk mengakses store'),nl,!.
 	
@@ -123,6 +126,7 @@ a :-
 	posisiQ(NewX,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(NewX,Y)),
+	questNpc,
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
@@ -194,6 +198,7 @@ w :-
 	posisiS(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	storeNpc,
 	write('Kamu berada di Store.'),nl,
 	write('Ketik store. untuk mengakses store'),nl,!.
 	
@@ -203,6 +208,7 @@ w :-
 	posisiQ(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	questNpc,
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
@@ -274,6 +280,7 @@ s :-
 	posisiS(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	store,
 	write('Kamu berada di Store.'), nl,
 	write('Ketik store. untuk mengakses store'),nl,!.
 	
@@ -283,6 +290,7 @@ s :-
 	posisiQ(X,NewY),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,NewY)),
+	questNpc,
 	write('Kamu menemui sebuah Quest!'), nl,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
@@ -350,16 +358,20 @@ teleport(X,Y) :-
 	posisiS(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Teleportasi berhasil. Kamu berada di Store.'),nl,
+	write('Teleportasi berhasil.'),nl,
+	storeNpc,
+	write('Kamu berada di Store.'), nl,
 	write('Ketik store. untuk mengakses store'),nl,!.
 	
 teleport(X,Y) :-
 	posisiQ(X,Y),
 	retract(koordinatP(_,_)),
 	asserta(koordinatP(X,Y)),
-	write('Teleportasi berhasil. Kamu berada di Quest.'),nl,
+	write('Teleportasi berhasil.'),nl,
+	questNpc,
 	availQuest(CurrentQuest, _),
 	writeQuest(CurrentQuest),
+	write('Kamu menemui sebuah Quest!'), nl,
 	write('ketik quest. untuk mengambil quest.'), nl,
 	!.
 
@@ -492,3 +504,49 @@ dragonAnimation :-
 	write('  " ") "( (/                                                                            '),nl,
 	write('    "   "  `                                                                            '),nl.
 
+questNpc :-
+	write('       .-""-.            '),nl,
+	write('      /-.{}  \\          '),nl,
+	write('      | _\\__.|          '),nl,
+	write('      \\/^)^ \\/         '),nl,
+	write('       \\ =  /           '),nl,
+	write('  .---./`--`\\.--._      '),nl,
+	write(' /     `;--"`     \\     '),nl,
+	write(';        /`       ;      '),nl,
+	write('|       |*        |      '),nl,
+	write('/   |   |     |    \\    '),nl,
+	write('|    \\  |*    /    |    '),nl,
+	write('\\_   |\\_|____/|  __/   '),nl,
+	write('  \\__//======\\\\__/    '),nl,
+	write('  / //_      _\\\\ \\    '),nl,
+	write('  -\'  |`""""`|  `-      '),nl,
+	write('      |  L   |           '),nl,
+	write('      >_ || _<           '),nl,
+	write('      |  ||  |           '),nl,
+	write('      |  ||  |           '),nl,
+	write('     /   ||   \\         '),nl,
+	write('    /    /,    \\        '),nl,
+	write('     `|"|`"|"|"`         '),nl,
+	write('     /  )  /  )          '),nl,
+	write('    /__/  /__/           '),nl.
+
+storeNpc :-
+	write('                  //////                                       '),nl,
+	write('             <====//////====[]                                 '),nl,
+	write('                 /////\\\\\\\\\\                               '),nl,
+	write('               ((((( ))))))))                                  '),nl,
+	write('               ||| /\\   /\\ ||                                '),nl,
+	write('               || |_O| |O_|||                                  '),nl,
+	write('              (9|     ^    |6)                                 '),nl,
+	write('                 \\    V   /                          )        '),nl,
+	write('                 (~~~~~~~~~)                   ( ((            '),nl,
+	write('                /~~~~~~~~~~~\\                     )) )        '),nl,
+	write('              ///////|||\\\\\\\\\\\\\\                 (( ((   '),nl,
+	write('            //                 \\\\                )  ))       '),nl,
+	write('      ______|~~~|____________|~~~|_________      (((           '),nl,
+	write('    []#=====`^^^\'============`^^^\'========#[]    |||         '),nl,
+	write('  __[]_____________________________________[]___(___)_         '),nl,
+	write(' [____________________________________________________]        '),nl,
+	write('   )   ===========================================  (          '),nl,
+	write('  /  /\'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`\\  \\      '),nl,
+	write('<__/    (___________________________)               \\__>      '),nl.                  
