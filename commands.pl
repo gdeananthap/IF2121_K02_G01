@@ -1,6 +1,7 @@
 start :-
 	\+started(_),
 	asserta(started(1)),
+	title,
 	initQuests,
 	initPlayer,
 	initMap,
@@ -592,4 +593,30 @@ storeNpc :-
 	write(' [____________________________________________________]        '),nl,
 	write('   )   ===========================================  (          '),nl,
 	write('  /  /\'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`\\  \\      '),nl,
-	write('<__/    (___________________________)               \\__>      '),nl.                  
+	write('<__/    (___________________________)               \\__>      '),nl.
+
+title :-
+	write('                _   _  _____  _   _   ____   _  __ _    _  _   _  _____                           '),nl,
+	write('               | \\ | ||_   _|| \\ | | / __ \\ | |/ /| |  | || \\ | ||_   _|                      '),nl,
+	write('               |  \\| |  | |  |  \\| || |  | || \' / | |  | ||  \\| |  | |                        '),nl,
+	write('               | . ` |  | |  | . ` || |  | ||  <  | |  | || . ` |  | |                            '),nl,
+	write('               | |\\  | _| |_ | |\\  || |__| || . \\ | |__| || |\\  | _| |_                       '),nl,
+	write('               |_| \\_||_____||_| \\_| \\____/ |_|\\_\\ \\____/ |_| \\_||_____|                   '),nl,
+	write('                                                                                                  '),nl,
+	write('                                                                                                  '),nl,
+	write('    ____                                   _      __           __           _    _                '),nl,
+	write('   |  __\\                                 ( )     \\ \\         / /          | |  | |             '),nl,
+	write('   | |  | | _ __  __ _   __ _   ___   _ __ |/ ___   \\ \\  /\\  / /_ __  __ _ | |_ | |__          '),nl,
+	write('   | |  | || \'__|/ _` | / _` | / _ \\ | \'_ \\  / __|   \\ \\/  \\/ /| \'__|/ _` || __|| \'_ \\  '),nl,
+	write('   | |__| || |  | (_| || (_| || (_) || | | | \\__ \\    \\  /\\  / | |  | (_| || |_ | | | |       '),nl,
+	write('   |_____/ |_|   \\__,_| \\__, | \\___/ |_| |_| |___/     \\/  \\/  |_|   \\__,_| \\__||_| |_|    '),nl,
+	write('                         __/ |                                                                    '),nl,
+	write('                        |___/                                                                     '),nl,nl,
+	write('NinoKuni adalah sebuah dunia yang besar, dibagi menjadi 3 ras besar yaitu Sorcerer, Archer, dan   '),nl,
+	write('Swordsman. Di pusat NinoKuni terdapat sebuah pohon besar yang disebut Pohon Dunia. Suatu hari,    '),nl,	
+	write('NinoKuni kedatangan sesosok Iblis Naga bernama Great Red yang merusak Pohon Dunia yang merupakan  '),nl,
+	write('satu-satunya sumber kehidupan di NinoKuni. Salah satu cara untuk menumbuhkan kembali kehidupan    '),nl,
+	write('di NinoKuni adalah dengan menanam taring emas dari Great Red sehingga kamu harus mengalahkan Great'),nl,
+	write('Red untuk mendapatkannya. Apakah kamu siap untuk memperkuat dirimu dan mengalahkan Great Red?     '),nl,nl.
+
+                   
