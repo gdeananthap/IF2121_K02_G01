@@ -155,8 +155,7 @@ attackWords :-
         retractall(isRun(_)),
         retractall(enemyturn(_)),
         retractall(turn(_)),
-        (levelUpMarker(X, Level, NExp);
-        kill(Name))
+        kill(Name)
     ), !.
 
 /* **** BELUM KETEMU ENEMY **** */

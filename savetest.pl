@@ -30,5 +30,5 @@ tembok(6,2).
 tembok(7,8).
 tembok(3,9).
 playerEquipment('Wooden Bow',none,none).
-player(shifa,1,archer,5,10350,100,100,90,60,160,0).
+player(shifa,1,archer,5,10350,1000,1000,300,60,160,0).
 inventory(34, 'Healing Potion', potion, common, none, 0, 0, 0, 50, 100, 5).
