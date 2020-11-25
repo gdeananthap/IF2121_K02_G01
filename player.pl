@@ -1,6 +1,6 @@
 :- dynamic(player/11).       /* Player Status */
 :- dynamic(playerEquipment/3). /* Player Equipment */ 
-:- dynamic(inventory/11). /* inventory(NamaItem) */
+:- dynamic(inventory/11). /* inventory(ID, Name, Type, Rarity, Class, addAttack, addDefense, addMaxHP, addCurrentHP, Price, Count) */
 
 /** Player Status **/
 /** player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest) **/
@@ -95,7 +95,7 @@ use(X) :-
     item(ID, X, Type,_,_,_,_,_,_,_),
     \+ isEnemyAlive(_),
     ((Type == potion) -> 
-        usePotion(ID),!
+        write('Kamu tidak bisa menggunakan potion diluar pertarungan!'),nl,!
     ; (Type == scroll) ->  
         useTeleport(ID),!    
     ;   equip(ID), !  
@@ -107,7 +107,7 @@ use(X) :-
     ((Type == potion) -> 
         usePotion(ID),!
     ; 
-        write('Kamu tidak bisa menggunakan scroll saat bertarung.'), nl
+        write('Kamu tidak bisa menggunakan scroll saat bertarung.'), nl, !
     ).
 
 usePotion(ID) :-
@@ -115,10 +115,10 @@ usePotion(ID) :-
     inventory(ID, _,_,_,_, AddAttack, AddDefense, _, AddCurrentHP, _, Count),
     NewAttack is Attack+AddAttack,
     NewDefense is Defense+AddDefense,
-    NewCurrentHealth is CurrentHealth+AddCurrentHP,
-    ( (NewCurrentHealth >= MaxHealth) ->
+    TempHealth is CurrentHealth+AddCurrentHP,
+    ( (TempHealth >= MaxHealth) ->
         NewCurrentHealth is MaxHealth
-    ; NewCurrentHealth is NewCurrentHealth
+    ; NewCurrentHealth is TempHealth
     ),
     NewCount is Count-1,
     ((NewCount =:= 0) -> 
@@ -127,8 +127,8 @@ usePotion(ID) :-
         retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
     ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth,_,_,_,SpecialAttack,ActiveQuest)),
         asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, NewCurrentHealth, NewAttack, NewDefense, SpecialAttack,ActiveQuest)),
-        retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-        assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+        retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+        assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),!  
     ).
 
 useTeleport(ID) :-
@@ -152,8 +152,8 @@ useTeleport(ID) :-
         NewCount is Count-1,
         ((NewCount =:= 0) -> 
             retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
-        ;   retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-            assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+        ;   retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),! 
         )
     ).
     
@@ -182,8 +182,8 @@ equip(ID) :-
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
             ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack,ActiveQuest)),
                 asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack,ActiveQuest)),
-                retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-                assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+            retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),! 
             ) 
         ;   item(ID2, CurrentWeapon,_,_,_,MinAttack, MinDefense, MinMaxHP, _,_),
             NewAttack is Attack+AddAttack-MinAttack,
@@ -199,8 +199,8 @@ equip(ID) :-
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
             ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
                 asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
-                retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-                assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+                retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),! 
             ) 
         )
     ; (Type == armor) ->
@@ -217,8 +217,8 @@ equip(ID) :-
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
             ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
                 asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
-                retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-                assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+                retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),!   
             ) 
         ;   item(ID2, CurrentArmor,_,_,_,MinAttack, MinDefense, MinMaxHP,_,_),
             NewAttack is Attack+AddAttack-MinAttack,
@@ -234,8 +234,8 @@ equip(ID) :-
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
             ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
                 asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
-                retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-                assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+                retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),!  
             ) 
         )
     ;   ((CurrentAccessory == none) -> 
@@ -251,8 +251,8 @@ equip(ID) :-
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
             ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
                 asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
-                retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-                assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+                retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),!  
             ) 
         ;   item(ID2, CurrentAccessory,_,_,_,MinAttack, MinDefense, MinMaxHP,_,_),
             NewAttack is Attack+AddAttack-MinAttack,
@@ -268,8 +268,8 @@ equip(ID) :-
                 retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),!
             ;   retract(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth,_,_,SpecialAttack, ActiveQuest)),
                 asserta(player(NameP, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, NewAttack, NewDefense, SpecialAttack, ActiveQuest)),
-                retract(inventory(ID,_,_,_,_,_,_,_,_,_,_)),
-                assertz(inventory(ID,_,_,_,_,_,_,_,_,_,NewCount)),!  
+                retract(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, Count)),
+            assertz(inventory(ID, Name, Type, Rarity, Class, AddAttack,AddDefense, AddMaxHP, AddCurrentHP, Price, NewCount)),! 
             ) 
         )
     ).

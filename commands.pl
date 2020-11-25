@@ -454,7 +454,8 @@ map :-
 	write('P: Player'), nl,
 	write('S: Store'), nl,
 	write('Q: Quest'), nl,
-	write('D: Dungeon Boss'), nl,!.
+	write('D: Dungeon Boss'), nl,
+	write('help. -- Show Available Commands'),nl,!.
 
 quit :- 
 	retractall(started(_)),
@@ -619,4 +620,38 @@ title :-
 	write('di NinoKuni adalah dengan menanam taring emas dari Great Red sehingga kamu harus mengalahkan Great'),nl,
 	write('Red untuk mendapatkannya. Apakah kamu siap untuk memperkuat dirimu dan mengalahkan Great Red?     '),nl,nl.
 
-                   
+titleLoad :-
+	write('                _   _  _____  _   _   ____   _  __ _    _  _   _  _____                           '),nl,
+	write('               | \\ | ||_   _|| \\ | | / __ \\ | |/ /| |  | || \\ | ||_   _|                      '),nl,
+	write('               |  \\| |  | |  |  \\| || |  | || \' / | |  | ||  \\| |  | |                        '),nl,
+	write('               | . ` |  | |  | . ` || |  | ||  <  | |  | || . ` |  | |                            '),nl,
+	write('               | |\\  | _| |_ | |\\  || |__| || . \\ | |__| || |\\  | _| |_                       '),nl,
+	write('               |_| \\_||_____||_| \\_| \\____/ |_|\\_\\ \\____/ |_| \\_||_____|                   '),nl,
+	write('                                                                                                  '),nl,
+	write('                                                                                                  '),nl,
+	write('    ____                                   _      __           __           _    _                '),nl,
+	write('   |  __\\                                 ( )     \\ \\         / /          | |  | |             '),nl,
+	write('   | |  | | _ __  __ _   __ _   ___   _ __ |/ ___   \\ \\  /\\  / /_ __  __ _ | |_ | |__          '),nl,
+	write('   | |  | || \'__|/ _` | / _` | / _ \\ | \'_ \\  / __|   \\ \\/  \\/ /| \'__|/ _` || __|| \'_ \\  '),nl,
+	write('   | |__| || |  | (_| || (_| || (_) || | | | \\__ \\    \\  /\\  / | |  | (_| || |_ | | | |       '),nl,
+	write('   |_____/ |_|   \\__,_| \\__, | \\___/ |_| |_| |___/     \\/  \\/  |_|   \\__,_| \\__||_| |_|    '),nl,
+	write('                         __/ |                                                                    '),nl,
+	write('                        |___/                                                                     '),nl,nl,
+	write('Selamat Datang kembali di NinoKuni, Pahlawan! Sekarang, Kehidupan NinoKuni sudah sangat terancam! '),nl,
+	write('Segera siapkan diri Anda untuk mengalahkan Great Red yang sudah merusak Pohon Dunia di NinoKuni!  '),nl,	
+	write('Selamatkanlah NinoKuni, Saya menaruh banyak harapan kepadamu!                                     '),nl,nl.
+
+help :-
+    write('w. a. s. d.     -- move'),nl,
+    write('map.            -- look at the map'),nl,
+    write('status.         -- show your status and equipment'),nl,
+	write('bag.            -- show your inventory'),nl,
+	write('use(\'X\').       -- use X from your inventory'), nl,
+	write('infoQuest.      -- see current quest detail    '),nl,
+    write('save(Filename). -- save your game'),nl, 
+	write('quit.           -- quit game'), nl, !.
+
+ninokuni :-
+	write('start.              -- start the game!'),nl,
+    write('loadFile(Filename). -- load previously saved game'),nl,
+	write('quit.               -- quit the game'),nl,!.
