@@ -93,16 +93,16 @@ quest :-
 	asserta(killCount(A, B, C)), !.
 
 /* reward(QuestID, PlusExp, PlusGold)*/
-reward(1, 10, 100).
-reward(2, 20, 200).
-reward(3, 30, 300).
-reward(4, 40, 400).
-reward(5, 50, 500).
-reward(6, 60, 600).
-reward(7, 70, 700).
-reward(8, 80, 800).
-reward(9, 90, 900).
-reward(10, 100, 1000).
+reward(1, 10, 1000).
+reward(2, 20, 2000).
+reward(3, 30, 3000).
+reward(4, 40, 4000).
+reward(5, 50, 5000).
+reward(6, 60, 6000).
+reward(7, 70, 7000).
+reward(8, 80, 8000).
+reward(9, 90, 9000).
+reward(10, 100, 10000).
 
 questRewarding(Name) :-
 	player(Name, Level, Job, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest),
