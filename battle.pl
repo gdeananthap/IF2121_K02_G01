@@ -17,6 +17,10 @@ enemyTriggered(Name) :-
         asserta(isRun(1)),
         fight
     ;
+        write('Attack: '), write(Attack), nl,
+        write('Special Attack: '), write(Special), nl,
+        write('Defense: '), write(Defense), nl,
+        write('HP: '), write(EnemyCurrentHP), nl, nl,
         write('Apa yang akan kamu lakukan?'), nl,
         write('- fight'), nl,
         write('- run'), nl,

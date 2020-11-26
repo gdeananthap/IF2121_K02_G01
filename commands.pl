@@ -11,9 +11,14 @@ start :-
 	started(_),
 	write('Ini udah mulai broo ._.').
 
+
+d :-
+	isEnemyAlive(_),
+	write('Eits, mau kemana? Ada musuh di depanmu loh, kalau mau lari pakai run.'), !.
+
 d :-
 	\+started(_),
-	write('Tolong di start dulu mas/mbak...'),!.
+	write('Tolong di start dulu mas/mbak...'), !.
 
 d :-
 	koordinatP(X,Y),
@@ -95,12 +100,16 @@ d :-
 d :-
 	koordinatP(X,Y),
 	NewX is X+1,
-	(
 	tembokKanan(NewX,Y); 
+	(
 	tembokTengah(NewX,Y)),
 	write('Kamu nabrak tembok...'),!.
 	
-	
+
+a :-
+	isEnemyAlive(_),
+	write('Eits, mau kemana? Ada musuh di depanmu loh, kalau mau lari pakai run.'), !.
+
 a :-
 	\+started(_),
 	write('Tolong di start dulu mas/mbak...'),!.
@@ -193,6 +202,10 @@ a :-
 
 
 w :-
+	isEnemyAlive(_),
+	write('Eits, mau kemana? Ada musuh di depanmu loh, kalau mau lari pakai run.'), !.
+
+w :-
 	\+started(_),
 	write('Tolong di start dulu mas/mbak...'),!.
 
@@ -282,6 +295,11 @@ w :-
 	),
 	write('Kamu nabrak tembok...'),!.
 	
+
+s :-
+	isEnemyAlive(_),
+	write('Eits, mau kemana? Ada musuh di depanmu loh, kalau mau lari pakai run.'), !.
+
 s :-
 	\+started(_),
 	write('Tolong di start dulu mas/mbak...'),!.
@@ -373,7 +391,11 @@ s :-
 	),
 	write('Kamu nabrak tembok...'),!.
 	
-	
+
+teleport(_,_) :-
+	isEnemyAlive(_),
+	write('Eits, mau kemana? Ada musuh di depanmu loh, kalau mau lari pakai run.'), !.
+
 teleport(X,Y) :-
 	\+tembokBawah(X,Y),
 	\+tembokAtas(X,Y),
@@ -456,6 +478,10 @@ map :-
 	write('Q: Quest'), nl,
 	write('D: Dungeon Boss'), nl,
 	write('help. -- Show Available Commands'),nl,!.
+
+quit :-
+	\+ started(_),
+	write('Belum di start udah mau keluar aja nih! Start dulu yuk :)'), !.
 
 quit :- 
 	retractall(started(_)),

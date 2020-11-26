@@ -70,7 +70,7 @@ printEnemy([A|B], [C|D], [E|F], [G|H], [I|J], [K|L], [M|N], [O|P]) :-
     nl,
     printEnemy(B,D,F,H,J,L,N,P).
 
-printAllEnemy :-
+enemyStatus :-
     nl, write('Enemy Status'), nl,
     makeListEnemy(ListName, ListAttack, ListSpecial, ListDefense, ListMaxHP, ListEXPGained, ListgoldGained, ListLevel),
     printEnemy(ListName, ListAttack, ListSpecial, ListDefense, ListMaxHP, ListEXPGained, ListgoldGained, ListLevel).

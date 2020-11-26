@@ -89,17 +89,17 @@ writeC(X,Y) :-
 
 writeC(X,Y) :-
 	posisiSlime(X,Y),
-	write('E'),
+	write('-'),
 	writeC(X+1,Y).
 
 writeC(X,Y) :-
 	posisiGoblin(X,Y),
-	write('G'),
+	write('-'),
 	writeC(X+1,Y).
 
 writeC(X,Y) :-
 	posisiWolf(X,Y),
-	write('W'),
+	write('-'),
 	writeC(X+1,Y).
 
 writeC(X,Y) :-
