@@ -208,25 +208,28 @@ questMarker(Name) :-
 /* debug */
 
 kill(slime) :-
-	player(Name,_,_,_,_,_,_,_,_,_,_),	
+	player(Name,Level,_,Exp,_,_,_,_,_,_,_),	
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	TempKill is KilledSlime+1,
 	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
 	asserta(killCount(TempKill, KilledGoblin, KilledWolf)),
-	questMarker(Name).
+	(levelUpMarker(Name, Level, Exp);
+	questMarker(Name)).
 
 kill(goblin) :-
-	player(Name,_,_,_,_,_,_,_,_,_,_),
+	player(Name,Level,_,Exp,_,_,_,_,_,_,_),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	TempKill is KilledGoblin+1,
 	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
 	asserta(killCount(KilledSlime, TempKill, KilledWolf)),
-	questMarker(Name).
+	(levelUpMarker(Name, Level, Exp);
+	questMarker(Name)).
 
 kill(wolf) :-
-	player(Name,_,_,_,_,_,_,_,_,_,_),
+	player(Name,Level,_,Exp,_,_,_,_,_,_,_),
 	killCount(KilledSlime, KilledGoblin, KilledWolf),
 	TempKill is KilledWolf+1,
 	retract(killCount(KilledSlime, KilledGoblin, KilledWolf)),
 	asserta(killCount(KilledSlime, KilledGoblin, TempKill)),
-	questMarker(Name).
+	(levelUpMarker(Name, Level, Exp);
+	questMarker(Name)).
