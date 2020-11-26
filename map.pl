@@ -191,6 +191,8 @@ initSlime :-
 	generateSlime,
 	generateSlime,
 	generateSlime,
+	generateSlime,
+	generateSlime,
 	generateSlime.
 
 
@@ -203,6 +205,12 @@ generateGoblin :-
 	asserta(koordinatGoblin(X,Y)).
 
 initGoblin :-
+	generateGoblin,
+	generateGoblin,
+	generateGoblin,
+	generateGoblin,
+	generateGoblin,
+	generateGoblin,
 	generateGoblin,
 	generateGoblin,
 	generateGoblin,

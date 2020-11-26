@@ -122,7 +122,7 @@ attackWords :-
     enemyMatched(Name, _, _, _, EnemyCurrentHP, _, _, _),
     EnemyCurrentHP > 0,
     write('HP '), write(Name), write(' sekarang adalah '), write(EnemyCurrentHP), nl,
-    write('Sekarang giliran musuh...'), nl,
+    write('Sekarang giliran musuh...'), nl, nl,
     enemyTurn,
     !.
 
@@ -142,9 +142,10 @@ attackWords :-
         retract(turn(_)),
         write('Selamat kamu mendapatkan taring emas Great Red dan menanamkannya untuk menghidupkan kembali NinoKuni!'), nl,
         write('Terimakasih untuk perjuanganmu, Pahlawan! Sampai Jumpa di kesempatan berikutnya.'),nl,nl,nl,nl,nl,nl,
-        credit,!
+        quit,
+        credit
     ;   
-        write('Kamu berhasil mendapatkan '), write(Expgained), write(' EXP dan '), write(Goldgained), write(' Gold!'), nl,
+        write('Kamu berhasil mendapatkan '), write(Expgained), write(' EXP dan '), write(Goldgained), write(' Gold!'), nl, nl,
         NExp is Exp + Expgained,
         NGold is Gold + Goldgained,
         NCurrentHealth is MaxHealth,
@@ -167,13 +168,17 @@ attack :-
     !.
 
 /* **** ATTACK BERHASIL **** */
-/* KALO SCALINGNYA GINI OKE NGGA */
 attack :-
     isEnemyAlive(_),
     turn(X),
     player(_, _, _, _, _, _, _, Attack, _, _,_),
     enemyMatched(Name, EnemyAttack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level),
-    Damage is Attack-(Defense//2),
+    BDamage is Attack-(Defense//2),
+    ((BDamage =< 0) ->
+        Damage is 0
+    ;
+        Damage is BDamage
+    ),
     NEnemyCurrentHP is EnemyCurrentHP - Damage,
     retract(enemyMatched(Name, EnemyAttack, Special, Defense, EnemyCurrentHP, Expgained, Goldgained, Level)),
     asserta(enemyMatched(Name, EnemyAttack, Special, Defense, NEnemyCurrentHP, Expgained, Goldgained, Level)),
@@ -227,7 +232,12 @@ enemyTurn :-
         write(Name), write(' berhasil melancarkan Special Attack!'), nl,
         write('Damage: '), write(Damage), nl
     ;
-        Damage is EnemyAttack-(Defense//2),
+        BDamage is EnemyAttack-(Defense//2),
+        ((BDamage =< 0) ->
+            Damage is 0
+        ;
+            Damage is BDamage
+        ),
         NCurrentHealth is CurrentHealth - Damage,
         retract(player(PlayerName, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(player(PlayerName, Level, Y, Exp, Gold, MaxHealth, NCurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
@@ -243,7 +253,7 @@ enemyAttackWords :-
     player(_, _, _, _, _, _, CurrentHealth, _, _, _, _),
     CurrentHealth > 0,
     write('HP kamu sekarang adalah '), write(CurrentHealth), nl,
-    write('Sekarang giliran kamu...'), nl,
+    write('Sekarang giliran kamu...'), nl, nl,
     cont,
     !.
 
@@ -258,7 +268,7 @@ enemyAttackWords :-
     retract(enemyturn(_)),
     retract(turn(_)),
     quit, nl,
-    write('HP kamu 0. Kamu gagal menyelatkan NinoKuni!  Terimakasih Untuk Perjuanganmu, Pahlawan!'),nl,
+    write('HP kamu 0. Kamu gagal menyelamatkan NinoKuni!  Terima kasih untuk Perjuanganmu, Pahlawan!'),nl,
     write('Ketik start. untuk memulai kembali permainan!'),nl,nl,nl,nl,nl, credit,
     !.
 
