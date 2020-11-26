@@ -9,14 +9,14 @@ initPlayer :-
     chooseName(X),
     chooseJob(X, Y),
     Exp is 0,
-    Gold is 10000,
+    Gold is 5000,
     ((Y == swordsman) ->
         Level is 1, 
-        MaxHealth is 100,
+        MaxHealth is 110,
         CurrentHealth is MaxHealth,
         Attack is 70, %udah ditambah stat dari basic weapon
-        Defense is 80,
-        SpecialAttack is 120,
+        Defense is 70,
+        SpecialAttack is 100,
         ActiveQuest is 0,
         asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(playerEquipment('Wooden Sword', none, none)),
@@ -25,11 +25,11 @@ initPlayer :-
         write('Selamat Berjuang Pahlawan '), write(X), write(' !'), nl,!
     ;(Y == archer) ->
         Level is 1, 
-        MaxHealth is 100,
+        MaxHealth is 90,
         CurrentHealth is MaxHealth,
         Attack is 90, %udah ditambah stat dari basic weapon
-        Defense is 60,
-        SpecialAttack is 160,
+        Defense is 50,
+        SpecialAttack is 120,
         ActiveQuest is 0,
         asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(playerEquipment('Wooden Bow', none, none)),
@@ -37,11 +37,11 @@ initPlayer :-
         asserta(koordinatP(1,1)),
         write('Selamat Berjuang Pahlawan '), write(X), write(' !'), nl,!
     ;   Level is 1,
-        MaxHealth is 120,
+        MaxHealth is 100,
         CurrentHealth is MaxHealth,
-        Attack is 90, %udah ditambah stat dari basic weapon
-        Defense is 40,
-        SpecialAttack is 160,
+        Attack is 80, %udah ditambah stat dari basic weapon
+        Defense is 30,
+        SpecialAttack is 140,
         ActiveQuest is 0,
         asserta(player(X, Level, Y, Exp, Gold, MaxHealth, CurrentHealth, Attack, Defense, SpecialAttack, ActiveQuest)),
         asserta(playerEquipment('Wooden Staff', none, none)),

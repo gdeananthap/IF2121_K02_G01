@@ -6,17 +6,17 @@
 /* Enemy(Name, Attack, Special, Defense, MaxHP, EXPGained, goldGained, Level) */
 :- dynamic(enemy/8).
 
-enemy(slime, 50, 70, 40, 80, 3, 150, 1).
-enemy(goblin, 70, 90, 35, 80, 3, 200, 1).
-enemy(wolf, 80, 100, 40, 90, 5, 350, 1).
+enemy(slime, 60, 70, 40, 80, 3, 150, 1).
+enemy(goblin, 70, 100, 50, 100, 3, 200, 1).
+enemy(wolf, 80, 130, 60, 120, 5, 350, 1).
 enemy(boss, 300, 350, 320, 500, 100, 10000, 1).
 
 enemyLevelUp(Name) :-
     enemy(Name, Attack, Special, Defense, MaxHP, Expgained, Goldgained, Level),
     Nlevel is Level+1,
-    Nattack is Attack+15,
-    Ndefense is Defense+15,
-    NmaxHP is MaxHP+20,
+    Nattack is Attack+20,
+    Ndefense is Defense+20,
+    NmaxHP is MaxHP+30,
     Nspecial is Special+25,
     ((Name == slime) ->
         ((Nlevel =:= 2) ->

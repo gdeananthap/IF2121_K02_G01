@@ -497,7 +497,8 @@ quit :-
 	retractall(player(_, _, _, _, _, _, _, _, _, _, _)),
 	retractall(playerEquipment(_, _, _)),
 	retractall(inventory(_, _, _, _, _, _, _, _, _, _, _)),
-	retractall(enemy(_, _, _, _, _, _, _, _)), !.
+	retractall(enemy(_, _, _, _, _, _, _, _)),
+	quitAnimation, !.
 
 slimeAnimation :-
 	write('              .-~~~-.                '),nl,
@@ -729,3 +730,38 @@ ninokuni :-
 	write('start.              -- start the game!'),nl,
     write('loadFile(Filename). -- load previously saved game'),nl,
 	write('quit.               -- quit the game'),nl,!.
+
+quitAnimation :-
+	write('   _____    ____     ____    _____    ____   __     __  ______       '),nl,
+	write('  / ____|  / __ \\   / __ \\  |  __ \\  |  _ \\  \\ \\   / / |  ____|'),nl,
+	write(' | |  __  | |  | | | |  | | | |  | | | |_) |  \\ \\_/ /  | |__       '),nl,
+	write(' | | |_ | | |  | | | |  | | | |  | | |  _ <    \\   /   |  __|       '),nl,
+	write(' | |__| | | |__| | | |__| | | |__| | | |_) |    | |    | |____       '),nl,
+	write('  \\_____|  \\____/   \\____/  |_____/  |____/     |_|    |______|   '),nl, nl,
+	write(' _______________________________________________________________     '),nl,
+	write('| Selamat tinggal Pahlawan, .....                               |    '),nl,
+	write('| Kehadiranmu akan selalu kami rindukan di NinoKuni!            |    '),nl,	
+	write('|______________________________________________________________ |    '),nl,
+	write('                                                               \\|   '),nl,
+	write('                                                    ,   A           {}                   '),nl,
+	write('                                                   / \\, | ,        .--.                 '),nl,
+	write('                                                  |    =|= >      /.--.\\                '),nl,
+	write('                                                   \\ /` | `       |====|                '),nl,
+	write('                                                    `   |         |`::`|                 '),nl,
+	write('                                                        |     .-;`\\..../`;_.-^-._       '),nl,
+	write('                                                       /\\\\/  /  |...::..|`   :   `|    '),nl,
+	write('                                                       |:`\\ |   /\'\'\'::\'\'|   .:.   |'),nl,
+	write('                                                        \\ /\\;-,/\\   ::  |..:::::..|   '),nl,
+	write('                                                        |\\ <` >  >._::_.| \':::::\' |   '),nl,
+	write('                                                        | `""`  /   ^^  |   \':\'   |    '),nl,
+	write('                                                        |       |       \\    :    /     '),nl,
+	write('                                                        |       |        \\   :   /      '),nl,
+	write('                                                        |       |___/\\___|`-.:.-`       '),nl,
+	write('                                                        |        \\_ || _/    `          '),nl,
+	write('                                                        |        <_ >< _>                '),nl,
+	write('                                                        |        |  ||  |                '),nl,
+	write('                                                        |        |  ||  |                '),nl,
+	write('                                                        |       _\\.:||:./_              '),nl,
+	write('                                                        |      /____/\\____\\            '),nl.
+
+                                                               

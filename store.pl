@@ -11,15 +11,14 @@ store :-
     asserta(isStore(1)),
     repeat,
     write('Selamat datang di Store, '), write(NameP), nl,
-    write('Apa yang ingin kamu lakukan? '), nl,
+    write('Apa yang ingin kamu lakukan? Masukkan angka 1-4, contoh : 1. untuk Gacha'), nl,
     write('1. Gacha (1000 gold)'), nl,
     write('2. Buy Items'), nl,
     write('3. Sell Items'), nl,
-    write('4. Help'), nl,
-    write('5. Exit'),nl,
+    write('4. Exit'),nl,
     read(X),nl,
-    ( (X < 1 ; X > 5) -> 
-        write('Hal yang bisa dilakukan hanya 1-5!'), nl, fail
+    ( (X < 1 ; X > 4) -> 
+        write('Hal yang bisa dilakukan hanya 1-4!'), nl, fail
     ; (X =:= 1 ) ->
         gacha, nl, fail
     ; (X =:= 2 ) ->
@@ -39,9 +38,6 @@ store :-
         write('Contoh : \'Healing Potion\' , untuk menjual healing potion'), nl,
         read(Y),
         sell(Y), nl, fail
-    ; (X =:= 4) ->
-        write('Masukkan angka 1-5 untuk berinteraksi dengan Store!'), nl,
-        write('Contoh : 1. '), nl, nl, fail
     ;   write('Terimakasih sudah mengunjungi Store! :D'),nl,
         retract(isStore(_)),!
     ).

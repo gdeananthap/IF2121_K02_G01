@@ -17,6 +17,7 @@ enemyTriggered(Name) :-
         asserta(isRun(1)),
         fight
     ;
+        write('Level: '), write(Level),nl,
         write('Attack: '), write(Attack), nl,
         write('Special Attack: '), write(Special), nl,
         write('Defense: '), write(Defense), nl,
