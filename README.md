@@ -1,5 +1,5 @@
-# TubesLogkom
-Membuat sebuah survival role-playing game di dunia baru sebagai seorang programmer dengan menggunakan bahasa pemrograman deklaratif GNU Prolog.
+# IF2121_K02_G01
+A survival role-playing game called "NINOKUNI: DRAGON'S WRATH" which is coded in logical programming language (GNU PROLOG)
 
 ## Requirements
 - [GNU Prolog](http://www.gprolog.org/#download)
@@ -7,7 +7,7 @@ Membuat sebuah survival role-playing game di dunia baru sebagai seorang programm
 ## Installation
 If you don't have the repository yet, clone the repository
 ```bash
-git clone https://github.com/gdeananthap/IF2121_K02_G01.git
+    git clone https://github.com/gdeananthap/IF2121_K02_G01.git
 ```
 
 ## How To Run
@@ -18,7 +18,7 @@ git clone https://github.com/gdeananthap/IF2121_K02_G01.git
 If you haven't installed it, then you should install GNU Prolog first!
 3. To start the game, type "ninokuni.".
 ```bash
-ninokuni.
+    ninokuni.
 ```
 4. General commands:
     * start.                -- start new game
