@@ -101,7 +101,7 @@ d :-
 	koordinatP(X,Y),
 	NewX is X+1,
 	(
-	tembokKanan(NewX,Y); 
+	tembokKanan(NewX,Y)	; 
 	tembokTengah(NewX,Y)),
 	write('Kamu nabrak tembok...'),!.
 	

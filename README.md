@@ -13,9 +13,8 @@ git clone https://github.com/gdeananthap/IF2121_K02_G01.git
 ## How To Run
 1.  On your computer : 
     * If you cloned the repository, Move to the directory that was created locally on your computer when you cloned the repository. 
-    * If you download "IF2121_K02_G01.zip", move to the directory where "IF2121_K02_G01.zip" saved. 
-2.  If you've already had installed GNU Prolog, open main.pl. main.pl will be compiled automatically. 
-If you haven't installed it, then you should install GNU Prolog first!
+    * If you download "IF2121_K02_G01.zip", move to the directory where "IF2121_K02_G01.zip" saved and extract it directly. 
+2.  If you've already had installed GNU Prolog, move to src folder inside IF2121_K02_G01 and open main.pl. Then, main.pl will be compiled automatically. If you haven't installed it, then you should install GNU Prolog first!
 3. To start the game, type "ninokuni.".
 ```bash
     ninokuni.
