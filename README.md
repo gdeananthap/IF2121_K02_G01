@@ -7,7 +7,7 @@ A survival role-playing game called "NINOKUNI: DRAGON'S WRATH" which is coded in
 ## Installation
 If you don't have the repository yet, clone the repository
 ```bash
-    git clone https://github.com/gdeananthap/IF2121_K02_G01.git
+git clone https://github.com/gdeananthap/IF2121_K02_G01.git
 ```
 
 ## How To Run
