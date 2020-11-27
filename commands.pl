@@ -100,8 +100,8 @@ d :-
 d :-
 	koordinatP(X,Y),
 	NewX is X+1,
-	tembokKanan(NewX,Y); 
 	(
+	tembokKanan(NewX,Y); 
 	tembokTengah(NewX,Y)),
 	write('Kamu nabrak tembok...'),!.
 	
@@ -386,11 +386,10 @@ s :-
 	koordinatP(X,Y),
 	NewY is Y+1,
 	(
-	tembokAtas(X,NewY);
+	tembokBawah(X,NewY);
 	tembokTengah(X,NewY)
 	),
 	write('Kamu nabrak tembok...'),!.
-	
 
 teleport(_,_) :-
 	isEnemyAlive(_),
