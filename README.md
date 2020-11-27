@@ -1,5 +1,5 @@
 # IF2121_K02_G01
-A survival role-playing game called "NINOKUNI: DRAGON'S WRATH" which is coded in logical programming language (GNU PROLOG)
+A survival role-playing game called "NINOKUNI: DRAGON'S WRATH" which is coded in a logical programming language (GNU PROLOG)
 
 ## Requirements
 - [GNU Prolog](http://www.gprolog.org/#download)
