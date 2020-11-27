@@ -1,18 +1,36 @@
 # TubesLogkom
 Membuat sebuah survival role-playing game di dunia baru sebagai seorang programmer dengan menggunakan bahasa pemrograman deklaratif GNU Prolog.
 
-How to run sementara:
-1. Buka program GNU Prolog, dari Menu File pilih Console
-2. Pilih file main.pl
-3. Masukkan command ninokuni. untuk memulai game
+## Requirements
+- [GNU Prolog](http://www.gprolog.org/#download)
+
+## Installation
+If you don't have the repository yet, clone the repository
+```bash
+git clone https://github.com/gdeananthap/IF2121_K02_G01.git
+```
+
+## How To Run
+1.  On your computer : 
+    * If you cloned the repository, Move to the directory that was created locally on your computer when you cloned the repository. 
+    * If you download "IF2121_K02_G01.zip", move to the directory where "IF2121_K02_G01.zip" saved. 
+2.  If you've already had installed GNU Prolog, open main.pl. main.pl will be compiled automatically. 
+If you haven't installed it, then you should install GNU Prolog first!
+3. To start the game, type "ninokuni.".
+```bash
+ninokuni.
+```
 4. General commands:
-* map.	  : untuk menampilkan situasi map sementara
-* w.	  : untuk bergerak satu petak ke atas
-* a.	  : untuk bergerak satu petak ke kiri
-* s.	  : untuk bergerak satu petak ke bawah
-* d.	  : untuk bergerak satu petak ke kanan
-* status. : untuk menampilkan status sementara pemain
-* bag.    : untuk menampilkan inventory pemain
-5. Pergi ke Q untuk memulai Quest, S untuk ke Store, D untuk melawan Dungeon Boss.
+    * start.                -- start new game
+    * loadFile(Filename)    -- load previously saved game
+    * w.a.s.d.              -- move
+    * map.                  -- look at the map
+    * status.               -- show player status and equipment
+    * bag.                  -- show player inventory
+    * use('X').             -- use X from player inventory
+    * infoQuest             -- see player current quest detail
+    * save(Filename).       -- save your game as filename
+    * quit.                 -- quit game.
+5. Explore the Game!
 
 
